@@ -1,3 +1,33 @@
 .usa-hero {
   background-image: url('img/mathias-reding-yfXhqAW5X0c-unsplash.jpg');
 }
+
+aside.quote {
+  font-style: italic;
+  border-left: 4px solid #00bde3;
+  padding-left: 1.5rem;
+}
+
+.quote > blockquote {
+  margin: 0;
+}
+
+.by {
+  font-style: normal;
+  font-weight: 700;
+  font-size: .85rem;
+  padding: 0;
+  margin: 0;
+}
+
+.usa-media-block__icon {
+  height: 5rem;
+}
+
+.header-y-padding {
+  padding-bottom: 2rem;
+}
+.usa-footer__logo-img {
+  width: 5rem;
+}
+
