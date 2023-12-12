@@ -31,3 +31,16 @@ aside.quote {
   width: 5rem;
 }
 
+.usa-button--outline-dark {
+  color: white;
+  box-shadow: inset 0 0 0 2px #fff;
+}
+
+.usa-button--outline-dark:visited {
+  color: white;
+}
+
+.usa-button--outline-dark:hover {
+  color: white;
+  box-shadow: inset 0 0 0 2px #005ea2;
+}

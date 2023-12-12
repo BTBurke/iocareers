@@ -1,188 +1,21 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="./img/state_seal.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IO Careers</title>
 </head>
-
 <body>
   {{> header }}
-  {{> hero }}
-  {{> quote }}
-  <section id="test-section-id" class="usa-section usa-section--dark">
-    <div class="grid-container">
-      <h2 class="font-heading-xl margin-y-0">For seasoned professionals</h2>
-      <p class="usa-intro">
-        If you're pursuing a position in an international organization,
-        the U.S. Government may advocate on your behalf.  U.S. multilateral engagement spans a range of important global issues, including peace and security, nuclear nonproliferation, human rights, economic development, climate change, global health, and food security. Given these policy priorities, and as the largest financial contributor to the UN and many other international organizations, the U.S. government has a vested interest in the composition of staff at these organizations.
-      </p>
-      <a class="usa-button usa-button--big" href="https://iipstate.my.site.com/iocareersintakeform/s/">Apply for advocacy</a>
-    </div>
-  </section>
-  <section id="test-section-id" class="usa-section usa-section--dark">
-    <div class="grid-container">
-      <h2 class="font-heading-xl margin-y-0">For students and young professionals</h2>
-      <p class="usa-intro">
-      Woeking in an international organization can be a highly rewarding experience for students and recent graduates interested in working on issues of global importance.  Programs ranging from short-term internships to multi-year development programs help those just starting a career to find a job that matches their skills and interests.
-      </p>
-      <a class="usa-button usa-button--big" href="">Learn more student and young professional programs</a>
-    </div>
-  </section>
-    <section class="usa-graphic-list usa-section">
-      <div class="grid-container">
-        <h2 class="font-heading-xl header-y-padding">Other opportunities</h2>
-        <div class="usa-graphic-list__row grid-row grid-gap">
-          <div class="usa-media-block tablet:grid-col">
-            <img class="usa-media-block__img usa-media-block__icon" src="/assets/img/material-icons/account_balance.svg" alt="Government agency icon" />
-            <div class="usa-media-block__body">
-              <h2 class="usa-graphic-list__heading">
-                Federal Employee Details
-              </h2>
-              <p>
-                Eligible U.S. government employees may be detailed or transferred to certain international organizations.
-              </p>
-            </div>
-          </div>
-          <div class="usa-media-block tablet:grid-col">
-            <img class="usa-media-block__img usa-media-block__icon" src="/assets/img/material-icons/policy.svg" alt="Policy icon" />
-            <div class="usa-media-block__body">
-              <h2 class="usa-graphic-list__heading">
-                Oversight Roles
-              </h2>
-              <p>
-                If you have administrative, financial, or management experience, you could be nominated to serve in a pro-bono oversight role.
-              </p>
-            </div>
-          </div>
-        </div>
-        <a class="usa-button usa-button--big" href="">Learn more about other opportunities</a>
-        
-        </div>
-      </div>
-    </section>
-    
+  <main>
+    {{> hero }}
+    {{> quote }}
+    {{> professionals }}
+    {{> jpo }}
+    {{> other }}
   </main>
-  <footer class="usa-footer">
-    <div class="grid-container usa-footer__return-to-top">
-      <a href="#">Return to top</a>
-    </div>
-    <div class="usa-footer__primary-section">
-      <nav class="usa-footer__nav" aria-label="Footer navigation">
-        <ul class="grid-row grid-gap">
-          <li class="mobile-lg:grid-col-4 desktop:grid-col-auto usa-footer__primary-content">
-            <a class="usa-footer__primary-link" href="https://iocareers.state.gov/Main/Content/Page/application-selection-process">How to apply</a>
-          </li>
-          <li class="mobile-lg:grid-col-4 desktop:grid-col-auto usa-footer__primary-content">
-            <a class="usa-footer__primary-link" href="https://iocareers.state.gov/Main/Content/Page/grades-salaries-and-benefits">Salary and benefits</a>
-          </li>
-          <li class="mobile-lg:grid-col-4 desktop:grid-col-auto usa-footer__primary-content">
-            <a class="usa-footer__primary-link" href="https://iocareers.state.gov/Main/Content/Page/frequently-asked-questions">Frequently asked questions</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-    <div class="usa-footer__secondary-section">
-      <div class="grid-container">
-        <div class="grid-row grid-gap">
-          <div class="usa-footer__logo grid-row mobile-lg:grid-col-6 mobile-lg:grid-gap-2">
-            <div class="mobile-lg:grid-col-auto">
-              <img class="usa-footer__logo-img" src="./img/state_seal.svg" alt="State Department Seal" />
-            </div>
-            <div class="mobile-lg:grid-col-auto">
-              <p class="usa-footer__logo-heading">U.S. Department of State</p>
-            </div>
-          </div>
-          <div class="usa-footer__contact-links mobile-lg:grid-col-6">
-            <div class="usa-footer__social-links grid-row grid-gap-1">
-              <div class="grid-col-auto">
-                <a class="usa-social-link" href="javascript:void(0);"><img class="usa-social-link__icon"
-                    src="/assets/img/usa-icons/facebook.svg" alt="Facebook" /></a>
-              </div>
-              <div class="grid-col-auto">
-                <a class="usa-social-link" href="javascript:void(0);"><img class="usa-social-link__icon"
-                    src="/assets/img/usa-icons/twitter.svg" alt="Twitter" /></a>
-              </div>
-              <div class="grid-col-auto">
-                <a class="usa-social-link" href="javascript:void(0);"><img class="usa-social-link__icon"
-                    src="/assets/img/usa-icons/youtube.svg" alt="YouTube" /></a>
-              </div>
-              <div class="grid-col-auto">
-                <a class="usa-social-link" href="javascript:void(0);"><img class="usa-social-link__icon"
-                    src="/assets/img/usa-icons/instagram.svg" alt="Instagram" /></a>
-              </div>
-              <div class="grid-col-auto">
-                <a class="usa-social-link" href="javascript:void(0);"><img class="usa-social-link__icon"
-                    src="/assets/img/usa-icons/rss_feed.svg" alt="RSS" /></a>
-              </div>
-            </div>
-            <address class="usa-footer__address">
-              <div class="usa-footer__contact-info grid-row grid-gap">
-                <div class="grid-col-auto">
-                  <a href="mailto:IO-Careers@state.gov">IO-Careers@state.gov</a>
-                </div>
-              </div>
-            </address>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <div class="usa-identifier">
-    <section class="usa-identifier__section usa-identifier__section--masthead" aria-label="Agency identifier">
-      <div class="usa-identifier__container">
-        <div class="usa-identifier__logos">
-          <a href="https://state.gov" class="usa-identifier__logo"><img class="usa-identifier__logo-img"
-             style="color: white;" src="./img/arms.svg" alt="State logo" role="img" /></a>
-        </div>
-        <section class="usa-identifier__identity" aria-label="Agency description">
-          <p class="usa-identifier__identity-domain">state.gov</p>
-          <p class="usa-identifier__identity-disclaimer">
-            An official website of the <a href="https://state.gov">U.S. Department of State</a>
-          </p>
-        </section>
-      </div>
-    </section>
-    <nav class="usa-identifier__section usa-identifier__section--required-links" aria-label="Important links">
-      <div class="usa-identifier__container">
-        <ul class="usa-identifier__required-links-list">
-          <li class="usa-identifier__required-links-item">
-            <a href="https://state.gov" class="usa-identifier__required-link usa-link">About State</a>
-          </li>
-          <li class="usa-identifier__required-links-item">
-            <a href="" class="usa-identifier__required-link usa-link">Accessibility support</a>
-          </li>
-          <li class="usa-identifier__required-links-item">
-            <a href="" class="usa-identifier__required-link usa-link">FOIA requests</a>
-          </li>
-          <li class="usa-identifier__required-links-item">
-            <a href="" class="usa-identifier__required-link usa-link">No FEAR Act data</a>
-          </li>
-          <li class="usa-identifier__required-links-item">
-            <a href="" class="usa-identifier__required-link usa-link">Office of the Inspector General</a>
-          </li>
-          <li class="usa-identifier__required-links-item">
-            <a href="" class="usa-identifier__required-link usa-link">Performance reports</a>
-          </li>
-          <li class="usa-identifier__required-links-item">
-            <a href="" class="usa-identifier__required-link usa-link">Privacy policy</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <section class="usa-identifier__section usa-identifier__section--usagov"
-      aria-label="U.S. government information and services">
-      <div class="usa-identifier__container">
-        <div class="usa-identifier__usagov-description">
-          Looking for U.S. government information and services?
-        </div>
-        <a href="https://www.usa.gov/" class="usa-link">Visit USA.gov</a>
-      </div>
-    </section>
-  </div>
+  {{> footer }}
   <script type="module" src="/main.js"></script>
 </body>
-
 </html>
