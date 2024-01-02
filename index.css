@@ -44,3 +44,10 @@ aside.quote {
   color: white;
   box-shadow: inset 0 0 0 2px #005ea2;
 }
+
+@media (min-width: 64em) {
+  .usa-header--basic .usa-navbar {
+    position: relative;
+    width: 50%;
+  }
+}
