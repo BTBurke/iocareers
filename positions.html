@@ -1,396 +1,387 @@
-<!doctype html>
-<html lang="en">
+{{#> layout }}
+<div class="grid-container">
+  <div class="usa-in-page-nav-container">
+    <aside class="usa-in-page-nav" data-title-text="On this page" data-title-heading-level="h1" data-scroll-offset="0"
+      data-root-margin="0px 0px 0px 0px" data-threshold="1"></aside>
+    <main id="main-content" class="usa-prose main-content" style="margin-top: 1rem;">
+      <h1>Employment Opportunties</h1>
+      <section class="">
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="./img/state_seal.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IO Careers</title>
-</head>
-
-<body>
-  {{> header }}
-  <div class="grid-container">
-    <div class="usa-in-page-nav-container">
-      <aside class="usa-in-page-nav" data-title-text="On this page" data-title-heading-level="h1" data-scroll-offset="0"
-        data-root-margin="0px 0px 0px 0px" data-threshold="1"></aside>
-      <main id="main-content" class="usa-prose main-content" style="margin-top: 1rem;">
-        <h1>Employment Opportunties</h1>
-        <section class="">
-          
-          <p class="">
-            In addition to the featured jobs below, you may want to use our <a href="https://iocareers.state.gov/Main/Job">job search tool</a> to find other vacancies by employment category, organization, or position level. Review the <a
-              href="#categories">employment categories</a> to learn about the types of positions available at international
-            organizations and find links to other job opportunities.
-          </p>
-        </section>
-        <section class="featured-jobs">
-          <h2 class="margin-bottom-0">Featured jobs</h2>
-          <div class="usa-summary-box" role="region" aria-labelledby="summary-box-key-information">
-            <div class="usa-summary-box__body">
-              <!-- featured jobs here-->
-              <div id="iva-featured-jobs-scroller"></div>
+        <p class="">
+          In addition to the featured jobs below, you may want to use our <a
+            href="https://iocareers.state.gov/Main/Job">job search tool</a> to find other vacancies by employment
+          category, organization, or position level. Review the <a href="#categories">employment categories</a> to learn
+          about the types of positions available at international
+          organizations and find links to other job opportunities.
+        </p>
+      </section>
+      <section class="featured-jobs">
+        <h2 class="margin-bottom-0">Featured jobs</h2>
+        <div class="usa-summary-box" role="region" aria-labelledby="summary-box-key-information">
+          <div class="usa-summary-box__body">
+            <!-- featured jobs here-->
+            <div id="featured-jobs">
+              <job-search featured></job-search>
             </div>
           </div>
-          <a class="usa-button usa-button--big margin-top-1" href="https://iocareers.state.gov/Main/Jobs">Search for other positions</a>
-        </section>
+        </div>
+        <a class="usa-button usa-button--big margin-top-1" href="https://iocareers.state.gov/Main/Jobs">See all open
+          positions</a>
+      </section>
 
-        <section class="" style="margin-top: 2rem;">
-          <ul class="usa-card-group">
-            <li class="usa-card usa-card--flag flex-1">
-              <div class="usa-card__container">
-                <div class="usa-card__header">
-                  <h2 class="usa-card__heading">Join the talent network</h2>
-                </div>
-                <div class="usa-card__media">
-                  <div class="usa-card__img">
-                    <img src="./img/kyle-glenn-nXt5HtLmlgE-unsplash.jpg" alt="A placeholder image" />
-                  </div>
-                </div>
-                <div class="usa-card__body">
-                  <p>If you're not ready to apply for a specific job at an international organization, you can add
-                    your resume, experience, and skills to our database.
-                    We use this information to match your skills with available job openings when we have an
-                    interest in finding a suitable candidate.</p>
-                </div>
-                <div class="usa-card__footer">
-                  <a href="#" class="usa-button">Submit your information</a>
+      <section class="" style="margin-top: 2rem;">
+        <ul class="usa-card-group">
+          <li class="usa-card usa-card--flag flex-1">
+            <div class="usa-card__container">
+              <div class="usa-card__header">
+                <h2 class="usa-card__heading">Join the talent network</h2>
+              </div>
+              <div class="usa-card__media">
+                <div class="usa-card__img">
+                  <img src="./img/kyle-glenn-nXt5HtLmlgE-unsplash.jpg" alt="A placeholder image" />
                 </div>
               </div>
-            </li>
-          </ul>
-
-        </section>
-        <section id="categories">
-          <h2 class="margin-bottom-0">Employment categories</h2>
-          <div class="grid-row grid-gap">
-            <div class="tablet:grid-col-6">
-              <h1 class="margin-top-0"></h1>
-              <ul class="usa-collection">
-                <li class="usa-collection__item">
-                  <div class="usa-collection__body">
-                    <h3 class="usa-collection__heading">
-                      Professional Positions
-                    </h3>
-                    <p class="usa-collection__description">
-                      Positions in the professional and higher categories (grades P and D) are typically for a
-                      fixed-term duration and are internationally recruited. Professional positions are the main
-                      employment category at the UN and other international organizations.
-                    </p>
-                  </div>
-                </li>
-                <li class="usa-collection__item">
-                  <div class="usa-collection__body">
-                    <h3 class="usa-collection__heading">
-                      Linguists
-                    </h3>
-                    <p class="usa-collection__description">
-                      The United Nations offers many opportunities for linguists, principally in one of the six official languages: Arabic, Chinese, English, French, Russian
-                      and Spanish. 
-                    </p>
-                    <p class="usa-collection__description">
-                      Positions that require language expertise, such as 
-                      copy preparers and proofreaders, editors, interpreters, terminologists, translators, verbatim
-                      reporters, and language teachers are filled through competitive language examinations. Check the UN website <a
-                        href="https://careers.un.org/lbw/home.aspx?viewtype=LE">for more information and exam
-                        dates.</a>
-                    </p>
-                  </div>
-                </li>
-                <li class="usa-collection__item">
-                  <div class="usa-collection__body">
-                    <h3 class="usa-collection__heading">
-                      Short-Term Contracts
-                    </h3>
-                    <p class="usa-collection__description">
-                      Many organizations offer short-term employment opportunities, often to recruit specific technical
-                      expertise or to fill temporary staffing gaps less than one year in duration. The recruitment and selection process is typically less cumbersome than applying to
-                      internationally advertised professional posts. Short-term opportunities can
-                      be a great avenue for exploring further career possibilities.
-                    <details>
-                      <summary>Click here for links to current short term vacancies by organization</summary>
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>Organization</th>
-                            <th>Headquarters</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                          </tr>
-                        </tbody>
-                        <tbody>
-                          <tr>
-                            <td><a href="https://jobs.ctbto.org/ERecruitmentPublicWeb/home.do?activeTab=2">Comprehensive
-                                Nuclear Test Ban Treaty Organization (CTBTO)</a></td>
-                            <td>Vienna, Austria</td>
-                          </tr>
-                          <tr>
-                            <td><a
-                                href="https://www.unescwa.org/work-us/vacancies/consultants-individual-contractors">Economic
-                                and Social Commission for Western Asia (ESCWA)</a></td>
-                            <td>Beirut, Lebanon</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.unece.org/oes/Job_opportunities/Vacancy_Announcements.html">Economic
-                                Commission for Europe (UNECE)</a></td>
-                            <td>Geneva, Switzerland</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.iadb.org/en/careers/types-of-jobs,1357.html">Inter-American
-                                Development Bank (IDB)</a></td>
-                            <td>Washington, DC, USA</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.iaea.org/About/Jobs/profstaff.html">International Atomic Energy
-                                Agency (IAEA)</a></td>
-                            <td>Vienna, Austria</td>
-                          </tr>
-                          <tr>
-                            <td><a
-                                href="https://careers.icao.int/wd/plsql/wd_portal.list?p_web_site_id=3325&amp;p_function=map&amp;p_org_id=6520&amp;p_title=Secretariat%20Prospective%20Jobs">International
-                                Civil Aviation Organization (ICAO)</a></td>
-                            <td>Montreal, Canada</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.icty.org/sid/10745">International Criminal Tribunal for Yugoslavia
-                                (ICTY)</a></td>
-                            <td>The Hague, Netherlands</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.ilo.org/public/english/bureau/pers/vacancy/other.htm">International
-                                Labor Organization (ILO)</a></td>
-                            <td>Geneva, Switzerland</td>
-                          </tr>
-                          <tr>
-                            <td><a
-                                href="http://www.imo.org/About/Careers/vacancies/Temporary/Pages/Default.aspx">International
-                                Maritime Organization (IMO)</a></td>
-                            <td>London, UK</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.imf.org/external/np/adm/rec/job/shortexp.htm">International
-                                Monetary Fund (IMF)</a></td>
-                            <td>Washington, DC, USA</td>
-                          </tr>
-                          <tr>
-                            <td><a href="https://www.iom.int/recruitment">International Organization for Migration
-                                (IOM)</a></td>
-                            <td>Geneva, Switzerland</td>
-                          </tr>
-                          <tr>
-                            <td><a
-                                href="http://www.itu.int/employment/Recruitment/types_of_appointment.htm">International
-                                Telecommunications Union (ITU)</a></td>
-                            <td>Geneva, Switzerland</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.intracen.org/about/short-term-jobs/">International Trade Center
-                                (ITC)</a></td>
-                            <td>Geneva, Switzerland</td>
-                          </tr>
-                          <tr>
-                            <td><a
-                                href="http://www.itlos.org/index.php?id=28&amp;L=0%5CoOpensinternallinkincurrentwindow">International
-                                Tribunal for the Law of the Sea (ITLOS)</a></td>
-                            <td>Hamburg, Germany</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.nato.int/structur/interim_staff/index-e.html">North Atlantic
-                                Treaty Organization (NATO)</a></td>
-                            <td>Brussels, Belgium</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.ohchr.org/EN/AboutUs/Pages/WorkStudyOpportunities.aspx">Office of
-                                the High Commissioner for Human Rights (OHCHR)</a></td>
-                            <td>Geneva, Switzerland</td>
-                          </tr>
-                          <tr>
-                            <td><a
-                                href="http://www.oecd.org/document/22/0,3746,en_21571361_45609340_40999702_1_1_1_1,00.html">Organization
-                                for Economic Cooperation and Development (OECD)</a></td>
-                            <td>Paris, France</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.osce.org/employment/95">Organization for Security and Cooperation
-                                in Europe (OSCE)</a></td>
-                            <td>Vienna, Austria</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.oas.org/EN/PINFO/HR/job.htm#consultancies">Organization of
-                                American States (OAS)</a></td>
-                            <td>Washington, DC, USA</td>
-                          </tr>
-                          <tr>
-                            <td><a
-                                href="http://www.paho.org/hq/index.php?option=com_content&amp;view=article&amp;id=1357%3A2009-welcome-paho-s-career-opportunities&amp;catid=1310%3Apaho-vacancies-homepage&amp;Itemid=1213&amp;lang=en">Pan
-                                American Health Organization (PAHO)</a></td>
-                            <td>Washington, DC, USA</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.fao.org/employment/vacancies/consultants/en/">Food and Agriculture
-                                Organization (FAO)</a></td>
-                            <td>Rome, Italy</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.hcch.net/index_en.php?act=vacancies.details&amp;vid=3">Hague
-                                Conference on Private International Law (HCCH)</a></td>
-                            <td>The Hague, Netherlands</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://e-roster.unhabitat.org/">UN Human Settlements Program (UN-HABITAT)</a>
-                            </td>
-                            <td>Nairobi, Kenya</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.unicef.org/about/employ/index_53129.html">UN Children&#39;s Fund
-                                (UNICEF)</a></td>
-                            <td>New York, NY, USA</td>
-                          </tr>
-                          <tr>
-                            <td><a
-                                href="http://unctad.org/en/Pages/About%20UNCTAD/Unctad-Employment.aspx#employment_as_a_consultant">UN
-                                Conference on Trade and Development (UNCTAD)</a></td>
-                            <td>Geneva, Switzerland</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://jobs.undp.org/cj_view_jobs.cfm?is_consult=1">UN Development Program
-                                (UNDP)</a></td>
-                            <td>New York, NY, USA</td>
-                          </tr>
-                          <tr>
-                            <td><a href="https://en.unesco.org/careers/short-term-opportunities">UN Educational,
-                                Scientific, and Cultural Organization (UNESCO)</a></td>
-                            <td>Paris, France</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.unep.org/vacancies/default.asp?vac_level=C">UN Environment Program
-                                (UNEP)</a></td>
-                            <td>Nairobi, Kenya</td>
-                          </tr>
-                          <tr>
-                            <td><a href="https://unfccc.int/secretariat/employment/consultancy.html">UN Framework
-                                Convention on Climate Change (UNFCCC)</a></td>
-                            <td>Bonn, Germany</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.unodc.org/unodc/vacancies/index.jsp">UN Office on Drugs and Crime
-                                (UNODC)</a></td>
-                            <td>Vienna, Austria</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.unfpa.org/about/employment">UN Population Fund (UNFPA)</a></td>
-                            <td>New York, NY, USA</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.unrwa.org/careers">UN Relief and Works Agency for Palestine
-                                Refugees in the Near East (UNRWA)</a></td>
-                            <td>Gaza City</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.icty.org/sid/10745">International Criminal Tribunal for the former
-                                Yugoslavia (ICTY)</a></td>
-                            <td>The Hague, Netherlands</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.unwomen.org/en/about-us/employment">UN Women</a></td>
-                            <td>New York, NY, USA</td>
-                          </tr>
-                          <tr>
-                            <td><a href="https://careers.un.org/lbw/home.aspx?viewtype=TJ">United Nations (UN)</a>
-                            </td>
-                            <td>New York, NY, USA</td>
-                          </tr>
-                          <tr>
-                            <td><a
-                                href="http://www.unops.org/ENGLISH/WHOWENEED/CONTRACT-TYPES/Pages/Individual-Contractor-Agreements-ICAs.aspx">UNOPS</a>
-                            </td>
-                            <td>Copenhagen, Denmark</td>
-                          </tr>
-                          <tr>
-                            <td><a
-                                href="http://extjobs.worldbank.org/external/default/main?menuPK=64778834&amp;pagePK=64273550&amp;piPK=64778828&amp;theSitePK=1058433">World
-                                Bank Group</a></td>
-                            <td>Washington, DC, USA</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.wfp.org/about/vacancies/short-term-or-consultancies">World Food
-                                Program (WFP)</a></td>
-                            <td>Rome, Italy</td>
-                          </tr>
-                          <tr>
-                            <td><a href="http://www.who.int/employment/who_we_need/en/index.html">World Health
-                                Organization (WHO)</a></td>
-                            <td>Geneva, Switzerland</td>
-                          </tr>
-                          <tr>
-                            <td><a href="https://erecruitment.wto.org/public/index-wto.asp?lng=en">World Trade
-                                Organization (WTO)</a></td>
-                            <td>Geneva, Switzerland</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </details>
-                    </p>
-                  </div>
-                </li>
-              </ul>
+              <div class="usa-card__body">
+                <p>If you're not ready to apply for a specific job at an international organization, you can add
+                  your resume, experience, and skills to our database.
+                  We use this information to match your skills with available job openings when we have an
+                  interest in finding a suitable candidate.</p>
+              </div>
+              <div class="usa-card__footer">
+                <a href="#" class="usa-button">Submit your information</a>
+              </div>
             </div>
+          </li>
+        </ul>
 
-            <div class="tablet:grid-col-6">
-              <h1 class="margin-top-0"></h1>
-              <ul class="usa-collection">
-                <li class="usa-collection__item">
-                  <div class="usa-collection__body">
-                    <h3 class="usa-collection__heading">
-                      United Nations Volunteers
-                    </h3>
-                    <p class="usa-collection__description">
-                      The United Nations Volunteers (UNV) program is administered by the United Nations Development
-                      Program (UNDP) to support peace and development worldwide. Volunteers work in development
-                      assistance projects, humanitarian, or peacekeeping operations, and are expected to
-                      serve for a minimum of one year. 
-                    </p>
-                    <p class="usa-collection__description">
-                      UNV offers a variety of benefits, including travel to/from the
-                      assignment, a monthly living allowance, health benefits, and annual leave. To be
-                      considered for the program, individuals must be at least 25 years old, have a college
-                      degree and a minimum of two years of relevant work experience. 
-                    </p>
-                    <p class="usa-collection__description">
-                      Interested applicants
-                      should <a href="http://www.unv.org/">visit the UNV website for more information</a> and
-                      application instructions.
-                    </p>
-                  </div>
-                </li>
-                <li class="usa-collection__item">
-                  <div class="usa-collection__body">
-                    <h3 class="usa-collection__heading">
-                      General Service Positions
-                    </h3>
-                    <p class="usa-collection__description">
-                      The United Nations and other international organizations use the term General Service to
-                      categorize administrative, secretarial, and clerical support staff positions as well as
-                      specialized technical posts such as printing, security, and building maintenance. These positions
-                      are generally recruited locally from the area in which the particular office is located, and can
-                      be filled by employees of any nationality.
-                    </p>
-                  </div>
-                </li> 
-              </ul>
-            </div>
+      </section>
+      <section id="categories">
+        <h2 class="margin-bottom-0">Employment categories</h2>
+        <div class="grid-row grid-gap">
+          <div class="tablet:grid-col-6">
+            <h1 class="margin-top-0"></h1>
+            <ul class="usa-collection">
+              <li class="usa-collection__item">
+                <div class="usa-collection__body">
+                  <h3 class="usa-collection__heading">
+                    Professional Positions
+                  </h3>
+                  <p class="usa-collection__description">
+                    Positions in the professional and higher categories (grades P and D) are typically for a
+                    fixed-term duration and are internationally recruited. Professional positions are the main
+                    employment category at the UN and other international organizations.
+                  </p>
+                </div>
+              </li>
+              <li class="usa-collection__item">
+                <div class="usa-collection__body">
+                  <h3 class="usa-collection__heading">
+                    Linguists
+                  </h3>
+                  <p class="usa-collection__description">
+                    The United Nations offers many opportunities for linguists, principally in one of the six official
+                    languages: Arabic, Chinese, English, French, Russian
+                    and Spanish.
+                  </p>
+                  <p class="usa-collection__description">
+                    Positions that require language expertise, such as
+                    copy preparers and proofreaders, editors, interpreters, terminologists, translators, verbatim
+                    reporters, and language teachers are filled through competitive language examinations. Check the UN
+                    website <a href="https://careers.un.org/lbw/home.aspx?viewtype=LE">for more information and exam
+                      dates.</a>
+                  </p>
+                </div>
+              </li>
+              <li class="usa-collection__item">
+                <div class="usa-collection__body">
+                  <h3 class="usa-collection__heading">
+                    Short-Term Contracts
+                  </h3>
+                  <p class="usa-collection__description">
+                    Many organizations offer short-term employment opportunities, often to recruit specific technical
+                    expertise or to fill temporary staffing gaps less than one year in duration. The recruitment and
+                    selection process is typically less cumbersome than applying to
+                    internationally advertised professional posts. Short-term opportunities can
+                    be a great avenue for exploring further career possibilities.
+                  <details>
+                    <summary>Click here for links to current short term vacancies by organization</summary>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Organization</th>
+                          <th>Headquarters</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                        </tr>
+                      </tbody>
+                      <tbody>
+                        <tr>
+                          <td><a href="https://jobs.ctbto.org/ERecruitmentPublicWeb/home.do?activeTab=2">Comprehensive
+                              Nuclear Test Ban Treaty Organization (CTBTO)</a></td>
+                          <td>Vienna, Austria</td>
+                        </tr>
+                        <tr>
+                          <td><a
+                              href="https://www.unescwa.org/work-us/vacancies/consultants-individual-contractors">Economic
+                              and Social Commission for Western Asia (ESCWA)</a></td>
+                          <td>Beirut, Lebanon</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.unece.org/oes/Job_opportunities/Vacancy_Announcements.html">Economic
+                              Commission for Europe (UNECE)</a></td>
+                          <td>Geneva, Switzerland</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.iadb.org/en/careers/types-of-jobs,1357.html">Inter-American
+                              Development Bank (IDB)</a></td>
+                          <td>Washington, DC, USA</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.iaea.org/About/Jobs/profstaff.html">International Atomic Energy
+                              Agency (IAEA)</a></td>
+                          <td>Vienna, Austria</td>
+                        </tr>
+                        <tr>
+                          <td><a
+                              href="https://careers.icao.int/wd/plsql/wd_portal.list?p_web_site_id=3325&amp;p_function=map&amp;p_org_id=6520&amp;p_title=Secretariat%20Prospective%20Jobs">International
+                              Civil Aviation Organization (ICAO)</a></td>
+                          <td>Montreal, Canada</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.icty.org/sid/10745">International Criminal Tribunal for Yugoslavia
+                              (ICTY)</a></td>
+                          <td>The Hague, Netherlands</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.ilo.org/public/english/bureau/pers/vacancy/other.htm">International
+                              Labor Organization (ILO)</a></td>
+                          <td>Geneva, Switzerland</td>
+                        </tr>
+                        <tr>
+                          <td><a
+                              href="http://www.imo.org/About/Careers/vacancies/Temporary/Pages/Default.aspx">International
+                              Maritime Organization (IMO)</a></td>
+                          <td>London, UK</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.imf.org/external/np/adm/rec/job/shortexp.htm">International
+                              Monetary Fund (IMF)</a></td>
+                          <td>Washington, DC, USA</td>
+                        </tr>
+                        <tr>
+                          <td><a href="https://www.iom.int/recruitment">International Organization for Migration
+                              (IOM)</a></td>
+                          <td>Geneva, Switzerland</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.itu.int/employment/Recruitment/types_of_appointment.htm">International
+                              Telecommunications Union (ITU)</a></td>
+                          <td>Geneva, Switzerland</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.intracen.org/about/short-term-jobs/">International Trade Center
+                              (ITC)</a></td>
+                          <td>Geneva, Switzerland</td>
+                        </tr>
+                        <tr>
+                          <td><a
+                              href="http://www.itlos.org/index.php?id=28&amp;L=0%5CoOpensinternallinkincurrentwindow">International
+                              Tribunal for the Law of the Sea (ITLOS)</a></td>
+                          <td>Hamburg, Germany</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.nato.int/structur/interim_staff/index-e.html">North Atlantic
+                              Treaty Organization (NATO)</a></td>
+                          <td>Brussels, Belgium</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.ohchr.org/EN/AboutUs/Pages/WorkStudyOpportunities.aspx">Office of
+                              the High Commissioner for Human Rights (OHCHR)</a></td>
+                          <td>Geneva, Switzerland</td>
+                        </tr>
+                        <tr>
+                          <td><a
+                              href="http://www.oecd.org/document/22/0,3746,en_21571361_45609340_40999702_1_1_1_1,00.html">Organization
+                              for Economic Cooperation and Development (OECD)</a></td>
+                          <td>Paris, France</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.osce.org/employment/95">Organization for Security and Cooperation
+                              in Europe (OSCE)</a></td>
+                          <td>Vienna, Austria</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.oas.org/EN/PINFO/HR/job.htm#consultancies">Organization of
+                              American States (OAS)</a></td>
+                          <td>Washington, DC, USA</td>
+                        </tr>
+                        <tr>
+                          <td><a
+                              href="http://www.paho.org/hq/index.php?option=com_content&amp;view=article&amp;id=1357%3A2009-welcome-paho-s-career-opportunities&amp;catid=1310%3Apaho-vacancies-homepage&amp;Itemid=1213&amp;lang=en">Pan
+                              American Health Organization (PAHO)</a></td>
+                          <td>Washington, DC, USA</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.fao.org/employment/vacancies/consultants/en/">Food and Agriculture
+                              Organization (FAO)</a></td>
+                          <td>Rome, Italy</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.hcch.net/index_en.php?act=vacancies.details&amp;vid=3">Hague
+                              Conference on Private International Law (HCCH)</a></td>
+                          <td>The Hague, Netherlands</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://e-roster.unhabitat.org/">UN Human Settlements Program (UN-HABITAT)</a>
+                          </td>
+                          <td>Nairobi, Kenya</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.unicef.org/about/employ/index_53129.html">UN Children&#39;s Fund
+                              (UNICEF)</a></td>
+                          <td>New York, NY, USA</td>
+                        </tr>
+                        <tr>
+                          <td><a
+                              href="http://unctad.org/en/Pages/About%20UNCTAD/Unctad-Employment.aspx#employment_as_a_consultant">UN
+                              Conference on Trade and Development (UNCTAD)</a></td>
+                          <td>Geneva, Switzerland</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://jobs.undp.org/cj_view_jobs.cfm?is_consult=1">UN Development Program
+                              (UNDP)</a></td>
+                          <td>New York, NY, USA</td>
+                        </tr>
+                        <tr>
+                          <td><a href="https://en.unesco.org/careers/short-term-opportunities">UN Educational,
+                              Scientific, and Cultural Organization (UNESCO)</a></td>
+                          <td>Paris, France</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.unep.org/vacancies/default.asp?vac_level=C">UN Environment Program
+                              (UNEP)</a></td>
+                          <td>Nairobi, Kenya</td>
+                        </tr>
+                        <tr>
+                          <td><a href="https://unfccc.int/secretariat/employment/consultancy.html">UN Framework
+                              Convention on Climate Change (UNFCCC)</a></td>
+                          <td>Bonn, Germany</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.unodc.org/unodc/vacancies/index.jsp">UN Office on Drugs and Crime
+                              (UNODC)</a></td>
+                          <td>Vienna, Austria</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.unfpa.org/about/employment">UN Population Fund (UNFPA)</a></td>
+                          <td>New York, NY, USA</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.unrwa.org/careers">UN Relief and Works Agency for Palestine
+                              Refugees in the Near East (UNRWA)</a></td>
+                          <td>Gaza City</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.icty.org/sid/10745">International Criminal Tribunal for the former
+                              Yugoslavia (ICTY)</a></td>
+                          <td>The Hague, Netherlands</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.unwomen.org/en/about-us/employment">UN Women</a></td>
+                          <td>New York, NY, USA</td>
+                        </tr>
+                        <tr>
+                          <td><a href="https://careers.un.org/lbw/home.aspx?viewtype=TJ">United Nations (UN)</a>
+                          </td>
+                          <td>New York, NY, USA</td>
+                        </tr>
+                        <tr>
+                          <td><a
+                              href="http://www.unops.org/ENGLISH/WHOWENEED/CONTRACT-TYPES/Pages/Individual-Contractor-Agreements-ICAs.aspx">UNOPS</a>
+                          </td>
+                          <td>Copenhagen, Denmark</td>
+                        </tr>
+                        <tr>
+                          <td><a
+                              href="http://extjobs.worldbank.org/external/default/main?menuPK=64778834&amp;pagePK=64273550&amp;piPK=64778828&amp;theSitePK=1058433">World
+                              Bank Group</a></td>
+                          <td>Washington, DC, USA</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.wfp.org/about/vacancies/short-term-or-consultancies">World Food
+                              Program (WFP)</a></td>
+                          <td>Rome, Italy</td>
+                        </tr>
+                        <tr>
+                          <td><a href="http://www.who.int/employment/who_we_need/en/index.html">World Health
+                              Organization (WHO)</a></td>
+                          <td>Geneva, Switzerland</td>
+                        </tr>
+                        <tr>
+                          <td><a href="https://erecruitment.wto.org/public/index-wto.asp?lng=en">World Trade
+                              Organization (WTO)</a></td>
+                          <td>Geneva, Switzerland</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </details>
+                  </p>
+                </div>
+              </li>
+            </ul>
           </div>
-    </div>
 
-
-    </section>
-    </main>
+          <div class="tablet:grid-col-6">
+            <h1 class="margin-top-0"></h1>
+            <ul class="usa-collection">
+              <li class="usa-collection__item">
+                <div class="usa-collection__body">
+                  <h3 class="usa-collection__heading">
+                    United Nations Volunteers
+                  </h3>
+                  <p class="usa-collection__description">
+                    The United Nations Volunteers (UNV) program is administered by the United Nations Development
+                    Program (UNDP) to support peace and development worldwide. Volunteers work in development
+                    assistance projects, humanitarian, or peacekeeping operations, and are expected to
+                    serve for a minimum of one year.
+                  </p>
+                  <p class="usa-collection__description">
+                    UNV offers a variety of benefits, including travel to/from the
+                    assignment, a monthly living allowance, health benefits, and annual leave. To be
+                    considered for the program, individuals must be at least 25 years old, have a college
+                    degree and a minimum of two years of relevant work experience.
+                  </p>
+                  <p class="usa-collection__description">
+                    Interested applicants
+                    should <a href="http://www.unv.org/">visit the UNV website for more information</a> and
+                    application instructions.
+                  </p>
+                </div>
+              </li>
+              <li class="usa-collection__item">
+                <div class="usa-collection__body">
+                  <h3 class="usa-collection__heading">
+                    General Service Positions
+                  </h3>
+                  <p class="usa-collection__description">
+                    The United Nations and other international organizations use the term General Service to
+                    categorize administrative, secretarial, and clerical support staff positions as well as
+                    specialized technical posts such as printing, security, and building maintenance. These positions
+                    are generally recruited locally from the area in which the particular office is located, and can
+                    be filled by employees of any nationality.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
   </div>
-  </div>
-  {{> footer }}
-  <script type="module" src="/main.js"></script>
-</body>
 
-</html>
+
+  </section>
+  </main>
+</div>
+</div>
+{{/layout}}

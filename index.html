@@ -1,21 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="./img/state_seal.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IO Careers</title>
-</head>
-<body>
-  {{> header }}
-  <main>
-    {{> hero }}
-    {{> quote }}
-    {{> professionals }}
-    {{> jpo }}
-    {{> other }}
-  </main>
-  {{> footer }}
-  <script type="module" src="/main.js"></script>
-</body>
-</html>
+{{#> layout}}
+<main>
+  {{> hero }}
+  {{> quote }}
+  {{> professionals }}
+  {{> jpo }}
+  {{> other }}
+</main>
+{{/layout}}

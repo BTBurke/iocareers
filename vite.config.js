@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import handlebars from 'vite-plugin-handlebars';
+import solid from 'vite-plugin-solid';
 
 export default {
   build: {
@@ -14,11 +15,12 @@ export default {
         process: resolve(__dirname, 'process.html'),
         jpo: resolve(__dirname, 'students-jpo.html'),
       },
-    },
+   },
   },
   plugins: [
     handlebars({
       partialDirectory: resolve(__dirname, 'partials'),
     }),
+    solid()
   ],
 };
