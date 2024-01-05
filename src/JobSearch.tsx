@@ -1,4 +1,4 @@
-import { createResource } from 'solid-js';
+import { Switch, Match, createResource, createSignal } from 'solid-js';
 
 type Job = {
     VacancyID: number,
@@ -13,26 +13,45 @@ type Job = {
     CountryID: number,
 }
 
-export default function SearchPage(props: {search?: string, featured: boolean} = {featured: false}) {
+export default function JobSearch(props: {search?: string, featured: boolean} = {featured: false}) {
   const [jobs] = createResource(fetchJobs)
+  const [filters, setFilter] = createSignal([])
+  const filteredJobs = () => {
+      return pipe(filters())(jobs())    
+  }
+  const orgs = () => {
+    return new Set(jobs()?.map((job) => {return job.OrganizationAcronym}))
+  }
+  const locations = () => {
+    return new Set(jobs()?.map((job) => { return job.VacancyLocation }))
+  }
   return (
-    <>
-      <h3>this is the search area for {jobs()?.Data.length}</h3>
-    </>
+    <Switch fallback={<p>Something went wrong. Please refresh the page.</p>}>
+      <Match when={jobs.loading}>
+        Loading...
+      </Match>
+      <Match when={!jobs.loading && jobs()}>
+        Got {filteredJobs()?.length} jobs with {orgs().size} orgs in {locations().size} places
+      </Match>
+    </Switch>
   );
 }
 
-type JobAPIResponse = {
-  Data: Job[]
+
+async function fetchJobs(): Promise<Job[]> {
+  const response = (await fetch('/Main/Jobs/SearchWithFilters', {
+    method: 'POST',
+  }))
+  const jobs = await response.json()
+  return jobs.data['Data']
+} 
+
+const pipe = (fns) => (x) => fns.reduce((v, f) => f(v), x);
+
+const filterExact = (field: keyof Job, value: string) => (jobs: Job[]): Job[] => {
+  return jobs.filter((job) => job[field] === value)
 }
 
-async function fetchJobs(): Promise<JobAPIResponse> {
-  const response = (await fetch('https://iocareers.state.gov/Main/Jobs/SearchWithFilters', {
-    method: 'POST',
-    mode: 'no-cors'
-  }))
-  console.log(response)
-  const jobs = await response.json()
-  console.log('total jobs: ', jobs.Data.length)
-  return jobs
-} 
+const filterTitle = (value: string) => (jobs: Job[]): Job[] => {
+  return jobs.filter((job) => job.VacancyTitle.toLowerCase().includes(value))
+}

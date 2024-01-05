@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import handlebars from 'vite-plugin-handlebars';
 import solid from 'vite-plugin-solid';
+import { viteMockServe } from 'vite-plugin-mock'
 
 export default {
   build: {
@@ -21,6 +22,11 @@ export default {
     handlebars({
       partialDirectory: resolve(__dirname, 'partials'),
     }),
-    solid()
+    solid(),
+    viteMockServe({
+      mockPath: 'mock',
+      enable: true,
+      logging: true 
+    }),
   ],
 };
