@@ -38,6 +38,17 @@ function toTitleCase(str: string) {
 }
 const titlecase = (jobs: Job[]): Job[] => jobs.map(job => Object.assign(job, {'VacancyLocation': toTitleCase(job.VacancyLocation)}))
 
+// removes redundant VacancyLevel information => jobs include it the title like `IAEA job (G6) (G-6)` so it looks for a short version of the 
+// information in VacancyLevel and removes it if it's redundant
+const redundantLevels = (jobs: Job[]): Job[] => jobs.map(job => {
+  if (job.VacancyLevel) {
+    const shortLevel = job.VacancyLevel.replace('-', '') // makes G-6 look like G6
+    return Object.assign(job, {'VacancyTitle': job.VacancyTitle.replace(`(${shortLevel})`, '')})     
+  } else {
+    return job
+  }
+})
+
 export default [
   fao,
   replace('VacancyLocation', 'Korea (the Republic of)', 'South Korea'),
@@ -45,5 +56,6 @@ export default [
   iaea,
   replace('VacancyDeadline', '2050-01-01', ''),
   duplicates,
-  titlecase
+  titlecase,
+  redundantLevels
 ]

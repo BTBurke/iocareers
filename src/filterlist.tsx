@@ -140,7 +140,7 @@ const style = `
 
 
 #filter-list > form > button[type="submit"] {
-  background-color: #005ea2;
+  background-color: rgb(0, 94, 162);
   font-size: 1.1rem;
   line-height: 1.1rem;
   height: 3rem;
