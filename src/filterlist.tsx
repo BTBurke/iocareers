@@ -37,13 +37,21 @@ export default function FilterList(props: Props) {
       return m
     })
   })
+  createEffect(() => {
+    // auto submit the form if you click into the datalist and select a completion
+    if (value()?.slice(0,4) === "loc:" || value()?.slice(0,4) === "org:") {
+      inputRef.blur()
+      onSubmit(null)
+    }
+  })
   const addLoc = (loc: string) => setLocFilter([...locFilter(), loc])
   const rmLoc = (loc: string) => () => setLocFilter(locFilter().filter(l => l !== loc))
   const addOrg = (org: string) => setOrgFilter([...orgFilter(), org])
   const rmOrg = (org: string) => () => setOrgFilter(orgFilter().filter(o => o !== org))
-  const onSubmit = (ev: SubmitEvent) => {
-    ev.preventDefault()
-    formRef.reset()
+  const onSubmit = (ev: SubmitEvent | null) => {
+    ev?.preventDefault()
+    console.log('value', value())
+
     if (value()?.slice(0,4) === 'loc:') {
       addLoc(value()?.slice(4) as string)
       setValue('')
@@ -55,15 +63,17 @@ export default function FilterList(props: Props) {
     if (value()?.length > 0) {
       setSearch(value() as string)
     }
+    formRef.reset()
     setValue('')
   }
   let formRef: HTMLFormElement
+  let inputRef: HTMLInputElement
   return (
     <>
       <style>{style}</style>
       <div id="filter-list">
       <form ref={el => formRef=el} onsubmit={onSubmit}>
-        <input type="search" autocapitalize="off" autocomplete="off" name="filter" oninput={(v) => setValue(v.target.value)} list="filters"/>
+        <input ref={el => inputRef=el} type="search" autocapitalize="off" autocomplete="off" name="filter" oninput={(v) => setValue(v.target.value)} list="filters"/>
         <button type="submit">Search</button> 
         <datalist id="filters">
           <Show when={value()?.slice(0,4) !== 'org:' && value()?.slice(0,4) !== 'loc:' && value()?.length > 0}>
