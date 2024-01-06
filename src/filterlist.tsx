@@ -90,7 +90,7 @@ export default function FilterList(props: Props) {
         </datalist>
       </form>
       </div>
-      <Show when={locFilter().length > 0 || orgFilter().length > 0 || search().length > 0 } fallback={<div style={{height: '2rem'}}></div>}>
+      <Show when={locFilter().length > 0 || orgFilter().length > 0 || search().length > 0 } fallback={<div style={{height: '2rem', padding: '0.5rem 0'}}><em>Start typing the name of an organization, city, country, or keyword to filter the jobs list.</em></div>}>
         <div id="appliedfilters">
           <div>Filters:</div>
           <For each={locFilter()}>{(loc) => 
