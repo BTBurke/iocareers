@@ -1,7 +1,6 @@
-import type { MockConfig } from 'vite-plugin-mock'
 import response from './out.json';
 
-export default function mock(config?: MockConfig) {
+export default function mock() {
   return [
   {
     url: '/Main/Jobs/SearchWithFilters',
