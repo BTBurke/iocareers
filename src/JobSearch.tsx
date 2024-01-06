@@ -1,6 +1,7 @@
-import { Switch, Match, createResource, createSignal } from 'solid-js';
+import { Switch, Match, createResource, createSignal, createEffect } from 'solid-js';
 import { JobList } from './joblist.tsx'
 import fixes from './fixes.ts'
+import FilterList from './filterlist.tsx'
 
 export type Job = {
     VacancyID: number,
@@ -11,22 +12,26 @@ export type Job = {
     VacancyStatus: "P" | "F",
     VacancyLocation: string,
     VacancyDeadline: string | null,
+    VacancyLevel: string,
     OrganizationID: number,
     CountryID: number,
 }
 
+export type Filter = (jobs: Job[]) => Job[]
+
 export default function JobSearch(props: {search?: string, featured?: string}) {
-  const [jobs] = createResource(fetchJobs)
-  const [filters, setFilters] = createSignal(getInitialFilters(props))
+  const [jobs] = createResource<Job[]>(fetchJobs)
+  const [filters, setFilters] = createSignal<Map<string, Filter>>(getInitialFilters(props))
   const filteredJobs = (): Job[] => {
     // filtered jobs are the set: featured || (search && (loc[0] || loc[1] || ...) && (org[0] || org[1] || ...))
     return pipe([...filters().values()])(jobs())
   }
-  const orgs = () => {
-    return new Set(jobs()?.map((job) => {return job.OrganizationAcronym}))
+  createEffect(() => console.log('filters', filters()))
+  const orgs: () => string[] = () => {
+    return [...new Set(jobs()?.map((job) => {return job.OrganizationAcronym})).values()]
   }
-  const locations = () => {
-    return new Set(jobs()?.map((job) => { return job.VacancyLocation }))
+  const locs: () => string[] = () => {
+    return [...new Set(jobs()?.map((job) => { return job.VacancyLocation })).values()]
   }
   return (
     <Switch fallback={<p>Something went wrong. Please refresh the page.</p>}>
@@ -34,10 +39,13 @@ export default function JobSearch(props: {search?: string, featured?: string}) {
         Loading...
       </Match>
       <Match when={!jobs.loading && jobs() && (props.search || props.featured)}>
-        I'm the simplified version of {filteredJobs()?.length} jobs
+        <JobList jobs={filteredJobs} />
       </Match>
       <Match when={!jobs.loading && jobs()}>
-        <JobList jobs={filteredJobs} />
+        <>
+          <FilterList orgs={orgs()} locs={locs()} setFilters={setFilters} initialSearch={props.search} />
+          <JobList jobs={filteredJobs} />
+        </>
       </Match>
     </Switch>
   );
@@ -51,18 +59,18 @@ async function fetchJobs(): Promise<Job[]> {
   return pipe(fixes)(jobs.data['Data'])
 } 
 
-// applies a series of functional transformations to a value.
+// applies a series of functional transformations to a value
 // pipe([a, b, c])(f) === c(b(a(f)))
-const pipe = (fns) => (x) => fns.reduce((v, f) => f(v), x);
+const pipe = (fns: Filter[]) => (x) => fns.reduce((v, f) => f(v), x);
 
 // returns a filtered list of jobs where job[field] is is one of the values
-const filterExact = (field: "OrganizationAcronym" | "VacancyLocation" | "VacancyStatus" , values: string[]) => (jobs: Job[]): Job[] => {
+export const filterExact = (field: "OrganizationAcronym" | "VacancyLocation" | "VacancyStatus" , values: string[]) => (jobs: Job[]): Job[] => {
   return jobs.filter((job) => values.includes(job[field]))
 }
 
 // returns a filtered list of jobs where there's a case-insensitive substring match 
 // for value in the job title
-const filterTitle = (value: string) => (jobs: Job[]): Job[] => {
+export const filterTitle = (value: string) => (jobs: Job[]): Job[] => {
   return jobs.filter((job) => job.VacancyTitle.toLowerCase().includes(value.toLowerCase()))
 }
 
