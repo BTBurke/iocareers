@@ -4,5 +4,5 @@ import './index.css';
 import JobSearch from './src/JobSearch.tsx'
 import { customElement } from "solid-element";
 
-customElement("job-search", {}, JobSearch)
+customElement("job-search", {search: '', featured: ''}, JobSearch)
 
