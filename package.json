@@ -4,21 +4,24 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vercel dev",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vercel",
+    "deploy": "vercel --prod"
   },
   "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@vercel/node": "^3.0.15",
     "glob": "^10.3.10",
-    "sass": "^1.69.5",
+    "sass": "^1.69.7",
     "typescript": "^5.3.3",
-    "vite": "^5.0.0",
+    "vercel": "^33.0.2",
+    "vite": "^5.0.11",
     "vite-plugin-handlebars": "^1.6.0",
-    "vite-plugin-mock": "^3.0.1",
     "vite-plugin-solid": "^2.8.0"
   },
   "dependencies": {
-    "@uswds/uswds": "^3.7.0",
+    "@uswds/uswds": "^3.7.1",
     "solid-element": "^1.8.0",
     "solid-js": "^1.8.8"
   }

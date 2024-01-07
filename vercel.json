@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "functions": {
+    "api/jobs.js": {
+      "memory": 1024,
+      "maxDuration": 10,
+      "includeFiles": "api/jobs/out.json"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/Main/Jobs/SearchWithFilters",
+      "destination": "/api/jobs"
+    }
+  ]
+}

@@ -56,7 +56,8 @@ async function fetchJobs(): Promise<Job[]> {
     method: 'POST',
   }))
   const jobs = await response.json()
-  return pipe(fixes)(jobs.data['Data'])
+  console.log('jobs', jobs)
+  return pipe(fixes)(jobs['Data'])
 } 
 
 // applies a series of functional transformations to a value
