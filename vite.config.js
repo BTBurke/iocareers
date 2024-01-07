@@ -14,6 +14,7 @@ export default {
         positions: resolve(__dirname, 'positions.html'),
         process: resolve(__dirname, 'process.html'),
         jpo: resolve(__dirname, 'students-jpo.html'),
+        jobs: resolve(__dirname, 'jobs.html'),
       },
    },
   },
