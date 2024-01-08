@@ -39,7 +39,7 @@ export default function FilterList(props: Props) {
   })
   createEffect(() => {
     // auto submit the form if you click into the datalist and select a completion
-    if (value()?.split(':')[0] === "Location" || value()?.split(':')[0] === "Organization") {
+    if (value()?.split(':')[0] === "Location" || value()?.split(':')[0] === "Organization" || value()?.split(':')[0] === 'Search') {
       inputRef.blur()
       onSubmit(null)
     }
@@ -61,7 +61,11 @@ export default function FilterList(props: Props) {
       setValue('')
     }
     if (value()?.length > 0) {
-      setSearch(value() as string)
+      if (value()?.split(':')[0] === "Search") {
+        setSearch(value()?.split(':')[1])
+      } else {
+        setSearch(value() as string)
+      }
     }
     formRef.reset()
     setValue('')
@@ -77,7 +81,7 @@ export default function FilterList(props: Props) {
         <button type="submit">Search</button> 
         <datalist id="filters">
           <Show when={value()?.split(':')[0] !== 'Organization' && value()?.split(':')[0] !== 'Location' && value()?.length > 0}>
-            <option value={value() as string}>Position contains "{value()}"</option>
+            <option value={`Search:${value()}`}>Position contains "{value()}"</option>
           </Show>
           <For each={props.orgs}>{(org) =>
              <option value={`Organization:${org}`}></option>
