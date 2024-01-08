@@ -39,7 +39,7 @@ export default function FilterList(props: Props) {
   })
   createEffect(() => {
     // auto submit the form if you click into the datalist and select a completion
-    if (value()?.slice(0,4) === "loc:" || value()?.slice(0,4) === "org:") {
+    if (value()?.split(':')[0] === "Location" || value()?.split(':')[0] === "Organization") {
       inputRef.blur()
       onSubmit(null)
     }
@@ -52,12 +52,12 @@ export default function FilterList(props: Props) {
     ev?.preventDefault()
     console.log('value', value())
 
-    if (value()?.slice(0,4) === 'loc:') {
-      addLoc(value()?.slice(4) as string)
+    if (value()?.split(':')[0] === 'Location') {
+      addLoc(value()?.split(':')[1] as string)
       setValue('')
     }
-    if (value()?.slice(0,4) === 'org:') {
-      addOrg(value()?.slice(4) as string)
+    if (value()?.split(':')[0] === 'Organization') {
+      addOrg(value()?.split(':')[1] as string)
       setValue('')
     }
     if (value()?.length > 0) {
@@ -76,15 +76,15 @@ export default function FilterList(props: Props) {
         <input ref={el => inputRef=el} type="search" autocapitalize="off" autocomplete="off" name="filter" oninput={(v) => setValue(v.target.value)} list="filters"/>
         <button type="submit">Search</button> 
         <datalist id="filters">
-          <Show when={value()?.slice(0,4) !== 'org:' && value()?.slice(0,4) !== 'loc:' && value()?.length > 0}>
+          <Show when={value()?.split(':')[0] !== 'Organization' && value()?.split(':')[0] !== 'Location' && value()?.length > 0}>
             <option value={value() as string}>Position contains "{value()}"</option>
           </Show>
           <For each={props.orgs}>{(org) =>
-             <option value={`org:${org}`}>Job is with 🏛 {org}</option>
+             <option value={`Organization:${org}`}></option>
           }
           </For>
           <For each={props.locs}>{(loc) =>
-            <option value={`loc:${loc}`}>Located in 📍 {loc}</option>
+            <option value={`Location:${loc}`}></option>
           }
           </For>
         </datalist>
