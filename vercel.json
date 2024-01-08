@@ -5,12 +5,20 @@
       "memory": 1024,
       "maxDuration": 10,
       "includeFiles": "api/jobs/out.json"
+    },
+    "api/metrics.js": {
+      "memory": 1024,
+      "maxDuration": 10
     }
   },
   "rewrites": [
     {
       "source": "/Main/Jobs/SearchWithFilters",
       "destination": "/api/jobs"
+    },
+    {
+      "source": "/Main/Jobs/UserClickedOnJobLink",
+      "destination": "/api/metrics"
     }
   ]
 }

@@ -177,7 +177,7 @@ export function JobList(props: Props) {
       <For each={paginatedJobs()}>{(job) =>
         <div class="job-item">
           <div class={ref?.offsetWidth <= 800 ? "title-container--small" :"title-container"}>
-            <div class="title"><a target="_blank" href={job.VacancyDetailURL}>{job.VacancyTitle}{job.VacancyLevel && <span> ({job.VacancyLevel})</span>}</a></div>
+            <div class="title"><a onclick={() => {doMetrics(1, job.VacancyID, job.OrganizationID); return false;}} target="_blank" href={job.VacancyDetailURL}>{job.VacancyTitle}{job.VacancyLevel && <span> ({job.VacancyLevel})</span>}</a></div>
             <Show when={job.VacancyDeadline}>
               <div class="closes">Closes {job.VacancyDeadline}</div>
             </Show>
@@ -205,4 +205,11 @@ export function JobList(props: Props) {
     </Show>
     </>
   ) 
+}
+
+const doMetrics = async (visitType: number, vacancyID: number, orgID: number) => {
+  fetch('/Main/Jobs/UserClickedOnJobLink', {
+    method: 'POST',
+    body: JSON.stringify({"visitTypeID": visitType, "vacancyID": vacancyID, "orgID": orgID, "userID": 0})
+  })
 }
