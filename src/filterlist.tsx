@@ -153,23 +153,23 @@ export default function FilterList(props: Props) {
         <div id="appliedfilters">
           <div>Filters:</div>
           <For each={locFilter()}>{(loc) => 
-            <div class="filter-chip">📍{loc}<button onclick={rmLoc(loc)} title={`Remove ${loc} filter`}>✕</button></div>
+            <div class="filter-chip">📍{loc}<button aria-label="remove filter" onclick={rmLoc(loc)} title={`Remove ${loc} filter`}>✕</button></div>
           }
           </For>
           <For each={orgFilter()}>{(org) =>
-            <div class="filter-chip">🏛 {org}<button onclick={rmOrg(org)} title={`Remove ${org} filter`}>✕</button></div>
+            <div class="filter-chip">🏛 {org}<button aria-label="remove filter" onclick={rmOrg(org)} title={`Remove ${org} filter`}>✕</button></div>
           }
           </For>
           <For each={occFilter()}>{(occ) =>
-            <div class="filter-chip">👤{occ}<button onclick={rmOcc(occ)} title={`Remove ${occ} filter`}>✕</button></div>
+            <div class="filter-chip">👤{occ}<button aria-label="remove filter" onclick={rmOcc(occ)} title={`Remove ${occ} filter`}>✕</button></div>
           }
           </For>
           <For each={lvlFilter()}>{(lvl) =>
-            <div class="filter-chip">⇑{lvl}<button onclick={rmLvl(lvl)} title={`Remove ${lvl} filter`}>✕</button></div>
+            <div class="filter-chip">⇑{lvl}<button aria-label="remove filter" onclick={rmLvl(lvl)} title={`Remove ${lvl} filter`}>✕</button></div>
           }
           </For>
           <Show when={search()}>
-            <div class="filter-chip">Position contains "{search()}"<button onclick={() => setSearch('')} title={`Remove search string ${search()}`}>✕</button></div>
+            <div class="filter-chip">Position contains "{search()}"<button aria-label="remove filter" onclick={() => setSearch('')} title={`Remove search string ${search()}`}>✕</button></div>        
           </Show>
         </div>
       </Show>
