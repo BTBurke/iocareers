@@ -173,7 +173,7 @@ export function JobList(props: Props) {
     <>
     <style>{style}</style>
     <Show when={props.jobs().length > 0} fallback={<div id="joblist"><h3>No jobs match your search</h3></div>}>
-    <div id="joblist" ref={el => ref=el} class="usa-prose" role="list" aria-live="assertive" aria-atomic="all">
+    <div id="joblist" ref={el => ref=el} class="usa-prose" role="list" aria-live="assertive" aria-atomic="true">
       <For each={paginatedJobs()}>{(job) =>
         <div class="job-item" role="listitem">
           <div class={ref?.offsetWidth <= 800 ? "title-container--small" :"title-container"}>
