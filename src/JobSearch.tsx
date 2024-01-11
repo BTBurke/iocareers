@@ -12,7 +12,8 @@ export type Job = {
     VacancyStatus: "P" | "F",
     VacancyLocation: string,
     VacancyDeadline: string | null,
-    VacancyLevel: string,
+    VacancyOccupation: string | null,
+    VacancyLevel: string | null,
     OrganizationID: number,
     CountryID: number,
 }
@@ -43,7 +44,7 @@ export default function JobSearch(props: {search?: string, featured?: string}) {
       </Match>
       <Match when={!jobs.loading && jobs()}>
         <>
-          <FilterList orgs={orgs()} locs={locs()} setFilters={setFilters} initialSearch={props.search} />
+          <FilterList jobs={jobs} setFilters={setFilters} initialSearch={props.search} />
           <JobList jobs={filteredJobs} />
         </>
       </Match>
@@ -62,7 +63,6 @@ const fetchJobs = (featured: boolean) => async (): Promise<Job[]> => {
     method: 'POST',
   }))
   const jobs = await response.json()
-  console.log('jobs', jobs)
   return pipe(fixes)(jobs['Data'])
 } 
 
@@ -71,7 +71,7 @@ const fetchJobs = (featured: boolean) => async (): Promise<Job[]> => {
 const pipe = (fns: Filter[]) => (x) => fns.reduce((v, f) => f(v), x);
 
 // returns a filtered list of jobs where job[field] is is one of the values
-export const filterExact = (field: "OrganizationAcronym" | "VacancyLocation" | "VacancyStatus" , values: string[]) => (jobs: Job[]): Job[] => {
+export const filterExact = (field: "OrganizationAcronym" | "VacancyLocation" | "VacancyStatus" | "VacancyOccupation" | "VacancyLevel", values: string[]) => (jobs: Job[]): Job[] => {
   return jobs.filter((job) => values.includes(job[field]))
 }
 
@@ -79,6 +79,16 @@ export const filterExact = (field: "OrganizationAcronym" | "VacancyLocation" | "
 // for value in the job title
 export const filterTitle = (value: string) => (jobs: Job[]): Job[] => {
   return jobs.filter((job) => job.VacancyTitle.toLowerCase().includes(value.toLowerCase()))
+}
+
+export const filterAny = (value: string) => (jobs: Job[]): Job[] => {
+  const lc = value.toLowerCase()
+  return jobs.filter((job) => job.VacancyTitle.toLowerCase().includes(lc) 
+  || job.OrganizationAcronym.toLowerCase().includes(lc)
+  || job.VacancyLocation.toLowerCase().includes(lc)
+  || job.VacancyLevel?.toLowerCase().includes(lc)
+  || job.VacancyOccupation?.toLowerCase().includes(lc)
+  )
 }
 
 // sets an intital filter list based on a substring match, called two possible ways:

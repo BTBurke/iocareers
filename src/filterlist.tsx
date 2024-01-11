@@ -1,12 +1,11 @@
 import { createSignal, createEffect, For, Show } from 'solid-js'
-import type { Setter } from 'solid-js'
-import type { Filter } from './JobSearch.tsx'
-import { filterExact, filterTitle } from './JobSearch.tsx'
+import type { Setter, Accessor } from 'solid-js'
+import type { Filter, Job } from './JobSearch.tsx'
+import { filterExact, filterAny } from './JobSearch.tsx'
 
 
 type Props = {
-  orgs: string[],
-  locs: string[],
+  jobs: Accessor<Job[]>
   setFilters: Setter<Map<string,Filter>>
   initialSearch: string | undefined
 }
@@ -14,8 +13,27 @@ type Props = {
 export default function FilterList(props: Props) {
   const [locFilter, setLocFilter] = createSignal<string[]>([])
   const [orgFilter, setOrgFilter] = createSignal<string[]>([])
+  const [occFilter, setOccFilter] = createSignal<string[]>([])
+  const [lvlFilter, setLvlFilter] = createSignal<string[]>([])
   const [search, setSearch] = createSignal<string>(props.initialSearch ?? '')
   const [value, setValue] = createSignal<string | null | undefined>()
+  const orgs: () => string[] = () => {
+    return [...new Set(props.jobs()?.map((job) => {return job.OrganizationAcronym})).values()]
+  }
+  const locs: () => string[] = () => {
+    return [...new Set(props.jobs()?.map((job) => { return job.VacancyLocation })).values()]
+  }
+  const occs: () => string[] = () => {
+    return [...new Set(props.jobs()?.map((job) => { return job.VacancyOccupation })).values()].filter(occ => occ !== null)
+  }
+  const lvls: () => string[] = () => {
+    return [...new Set(props.jobs()?.map((job) => { return job.VacancyLevel })).values()].filter(lvl => lvl !== null)
+  }
+  const filteredOrgs = () => value() ? orgs().filter(org => org.toLowerCase().includes(value().toLowerCase())) : []
+  const filteredLocs = () => value() ? locs().filter(loc => loc.toLowerCase().includes(value().toLowerCase())) : []
+  const filteredOccs = () => value() ? occs().filter(occ => occ.toLowerCase().includes(value().toLowerCase())) : []
+  const filteredLvls = () => value() ? lvls().filter(lvl => lvl.toLowerCase().includes(value().toLowerCase())) : []
+  
   createEffect(() => {
     props.setFilters((prev) => {      
       const m = new Map(prev)
@@ -29,8 +47,18 @@ export default function FilterList(props: Props) {
       } else {
         m.delete('organization')
       }
+      if (occFilter().length > 0) {
+        m.set('occupation', filterExact('VacancyOccupation', occFilter()))
+      } else {
+        m.delete('occupation')
+      }
+      if (lvlFilter().length > 0) {
+        m.set('level', filterExact('VacancyLevel', lvlFilter()))
+      } else {
+        m.delete('level')
+      }
       if (search().length > 0) {
-        m.set('search', filterTitle(search()))
+        m.set('search', filterAny(search()))
       } else {
         m.delete('search')
       }
@@ -39,7 +67,7 @@ export default function FilterList(props: Props) {
   })
   createEffect(() => {
     // auto submit the form if you click into the datalist and select a completion
-    if (value()?.split(':')[0] === "Location" || value()?.split(':')[0] === "Organization" || value()?.split(':')[0] === 'Search') {
+    if (isQuickClick(value())) {
       inputRef.blur()
       onSubmit(null)
     }
@@ -48,21 +76,40 @@ export default function FilterList(props: Props) {
   const rmLoc = (loc: string) => () => setLocFilter(locFilter().filter(l => l !== loc))
   const addOrg = (org: string) => setOrgFilter([...orgFilter(), org])
   const rmOrg = (org: string) => () => setOrgFilter(orgFilter().filter(o => o !== org))
+  const addOcc = (occ: string) => setOccFilter([...occFilter(), occ])
+  const rmOcc = (occ: string) => () => setOccFilter(occFilter().filter(l => l !== occ))
+  const addLvl = (lvl: string) => setLvlFilter([...lvlFilter(), lvl])
+  const rmLvl = (lvl: string) => () => setLvlFilter(lvlFilter().filter(l => l !== lvl))
+  
   const onSubmit = (ev: SubmitEvent | null) => {
     ev?.preventDefault()
-    console.log('value', value())
 
-    if (value()?.split(':')[0] === 'Location') {
-      addLoc(value()?.split(':')[1] as string)
+    const keyword = value()?.split(':')[0]
+    const getValue = (): string => value()?.split(':')[1] as string
+
+    console.log('value', value())
+    console.log(value()?.split(':'))
+    if (keyword.includes('Location')) {
+      addLoc(getValue())
       setValue('')
     }
-    if (value()?.split(':')[0] === 'Organization') {
-      addOrg(value()?.split(':')[1] as string)
+    if (keyword.includes('Organization')) {
+      addOrg(getValue())
+      setValue('')
+    }
+    if (keyword.includes('Category')) {
+      console.log('got occupation', getValue())
+      addOcc(getValue())
+      setValue('')
+    }
+    if (keyword.includes('Level')) {
+      console.log('got level', getValue())
+      addLvl(getValue())
       setValue('')
     }
     if (value()?.length > 0) {
-      if (value()?.split(':')[0] === "Search") {
-        setSearch(value()?.split(':')[1])
+      if (keyword === "Search") {
+        setSearch(getValue())
       } else {
         setSearch(value() as string)
       }
@@ -80,33 +127,49 @@ export default function FilterList(props: Props) {
         <input ref={el => inputRef=el} type="search" autocapitalize="off" autocomplete="off" name="filter" oninput={(v) => setValue(v.target.value)} list="filters"/>
         <button type="submit">Search</button> 
         <datalist id="filters">
-          <Show when={value()?.split(':')[0] !== 'Organization' && value()?.split(':')[0] !== 'Location' && value()?.length > 0}>
+          <Show when={!isQuickClick(value()) && value()?.length > 0}>
             <option value={`Search:${value()}`}>Position contains "{value()}"</option>
           </Show>
-          <For each={props.orgs}>{(org) =>
-             <option value={`Organization:${org}`}></option>
+          <For each={filteredOrgs()}>{(org) =>
+             <option value={`Job with Organization:${org}`}></option>
           }
           </For>
-          <For each={props.locs}>{(loc) =>
-            <option value={`Location:${loc}`}></option>
+          <For each={filteredLocs()}>{(loc) =>
+            <option value={`Job is in Location:${loc}`}></option>
+          }
+          </For>
+          <For each={filteredOccs()}>{(occ) =>
+            <option value={`Job is in Occupational Category:${occ}`}></option>
+          }
+          </For>
+          <For each={filteredLvls()}>{(lvl) =>
+            <option value={`Job is at Grade Level:${lvl}`}></option>
           }
           </For>
         </datalist>
       </form>
       </div>
-      <Show when={locFilter().length > 0 || orgFilter().length > 0 || search().length > 0 } fallback={<div style={{height: '2rem', padding: '0.5rem 0'}}><em>Start typing the name of an organization, city, country, or keyword to filter the jobs list.</em></div>}>
+      <Show when={locFilter().length > 0 || orgFilter().length > 0 || search().length > 0 || occFilter().length > 0 || lvlFilter().length > 0 } fallback={<div style={{height: '2rem', padding: '0.5rem 0'}}><em>Start typing the name of an organization, city, country, or keyword to filter the jobs list.</em></div>}>
         <div id="appliedfilters">
           <div>Filters:</div>
           <For each={locFilter()}>{(loc) => 
-            <div class="filter-chip">📍{loc}<button onclick={rmLoc(loc)} title={`Remove ${loc} filter`}>✕</button></div>
+            <div class="filter-chip">📍{loc}<button aria-label="remove filter" onclick={rmLoc(loc)} title={`Remove ${loc} filter`}>✕</button></div>
           }
           </For>
           <For each={orgFilter()}>{(org) =>
-            <div class="filter-chip">🏛 {org}<button onclick={rmOrg(org)} title={`Remove ${org} filter`}>✕</button></div>
+            <div class="filter-chip">🏛 {org}<button aria-label="remove filter" onclick={rmOrg(org)} title={`Remove ${org} filter`}>✕</button></div>
+          }
+          </For>
+          <For each={occFilter()}>{(occ) =>
+            <div class="filter-chip">👤{occ}<button aria-label="remove filter" onclick={rmOcc(occ)} title={`Remove ${occ} filter`}>✕</button></div>
+          }
+          </For>
+          <For each={lvlFilter()}>{(lvl) =>
+            <div class="filter-chip">⇑{lvl}<button aria-label="remove filter" onclick={rmLvl(lvl)} title={`Remove ${lvl} filter`}>✕</button></div>
           }
           </For>
           <Show when={search()}>
-            <div class="filter-chip">Position contains "{search()}"<button onclick={() => setSearch('')} title={`Remove search string ${search()}`}>✕</button></div>
+            <div class="filter-chip">Position contains "{search()}"<button aria-label="remove filter" onclick={() => setSearch('')} title={`Remove search string ${search()}`}>✕</button></div>        
           </Show>
         </div>
       </Show>
@@ -114,6 +177,14 @@ export default function FilterList(props: Props) {
   )
 }
 
+const isQuickClick = (value: string | null | undefined): boolean => {
+  const keyword = value?.split(':')[0]
+  return keyword?.includes('Organization')
+  || keyword?.includes('Category')
+  || keyword?.includes('Search')
+  || keyword?.includes('Location')
+  || keyword?.includes ('Level')
+} 
 
 const style = `
 #appliedfilters {

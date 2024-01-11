@@ -173,9 +173,9 @@ export function JobList(props: Props) {
     <>
     <style>{style}</style>
     <Show when={props.jobs().length > 0} fallback={<div id="joblist"><h3>No jobs match your search</h3></div>}>
-    <div id="joblist" ref={el => ref=el} class="usa-prose">
+    <div id="joblist" ref={el => ref=el} class="usa-prose" role="list" aria-live="assertive" aria-atomic="all">
       <For each={paginatedJobs()}>{(job) =>
-        <div class="job-item">
+        <div class="job-item" role="listitem">
           <div class={ref?.offsetWidth <= 800 ? "title-container--small" :"title-container"}>
             <div class="title"><a onclick={() => {doMetrics(1, job.VacancyID, job.OrganizationID); return false;}} target="_blank" href={job.VacancyDetailURL}>{job.VacancyTitle}{job.VacancyLevel && <span> ({job.VacancyLevel})</span>}</a></div>
             <Show when={job.VacancyDeadline}>
