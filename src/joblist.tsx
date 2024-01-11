@@ -210,6 +210,6 @@ export function JobList(props: Props) {
 const doMetrics = async (visitType: number, vacancyID: number, orgID: number) => {
   fetch('/Main/Jobs/UserClickedOnJobLink', {
     method: 'POST',
-    body: JSON.stringify({"visitTypeID": visitType, "vacancyID": vacancyID, "orgID": orgID, "userID": 0})
+    body: JSON.stringify({"visitTypeID": visitType, "vacancyID": vacancyID, "organizationID": orgID, "userID": 0})
   })
 }
