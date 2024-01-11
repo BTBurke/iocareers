@@ -28,12 +28,6 @@ export default function JobSearch(props: {search?: string, featured?: string}) {
     return pipe([...filters().values()])(jobs())
   }
   createEffect(() => console.log('filters', filters()))
-  const orgs: () => string[] = () => {
-    return [...new Set(jobs()?.map((job) => {return job.OrganizationAcronym})).values()]
-  }
-  const locs: () => string[] = () => {
-    return [...new Set(jobs()?.map((job) => { return job.VacancyLocation })).values()]
-  }
   return (
     <Switch fallback={<p>Something went wrong. Please refresh the page.</p>}>
       <Match when={jobs.loading}>
