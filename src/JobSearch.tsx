@@ -20,7 +20,7 @@ export type Job = {
 export type Filter = (jobs: Job[]) => Job[]
 
 export default function JobSearch(props: {search?: string, featured?: string}) {
-  const [jobs] = createResource<Job[]>(fetchJobs)
+  const [jobs] = createResource<Job[]>(fetchJobs(!!props.featured))
   const [filters, setFilters] = createSignal<Map<string, Filter>>(getInitialFilters(props))
   const filteredJobs = (): Job[] => {
     // filtered jobs are the set: featured || (search && (loc[0] || loc[1] || ...) && (org[0] || org[1] || ...))
@@ -51,8 +51,14 @@ export default function JobSearch(props: {search?: string, featured?: string}) {
   );
 }
 
-async function fetchJobs(): Promise<Job[]> {
-  const response = (await fetch('/Main/Jobs/SearchWithFilters', {
+const fetchJobs = (featured: boolean) => async (): Promise<Job[]> => {
+  let URL: string
+  if (featured) {
+    URL = '/Main/Jobs/SearchForFeaturedJobs'
+  } else {
+    URL = '/Main/Jobs/SearchForAllOpenJobs'
+  }
+  const response = (await fetch(URL, {
     method: 'POST',
   }))
   const jobs = await response.json()

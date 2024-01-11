@@ -13,7 +13,11 @@
   },
   "rewrites": [
     {
-      "source": "/Main/Jobs/SearchWithFilters",
+      "source": "/Main/Jobs/SearchForFeaturedJobs",
+      "destination": "/api/jobs"
+    },
+    {
+      "source": "/Main/Jobs/SearchForAllOpenJobs",
       "destination": "/api/jobs"
     },
     {
