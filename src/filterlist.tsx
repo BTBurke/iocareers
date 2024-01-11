@@ -20,13 +20,13 @@ export default function FilterList(props: Props) {
   const [value, setValue] = createSignal<string | null | undefined>()
   const [filtersOpen, setFiltersOpen] = createSignal<boolean>(false)
   const orgs: () => string[] = () => {
-    return [...new Set(props.jobs()?.map((job) => {return job.OrganizationAcronym})).values()].filter(org => org !== '')
+    return [...new Set(props.jobs()?.map((job) => {return job.OrganizationAcronym})).values()].filter(org => org !== '').sort()
   }
   const locs: () => string[] = () => {
-    return [...new Set(props.jobs()?.map((job) => { return job.VacancyLocation })).values()].filter(loc => loc !== '')
+    return [...new Set(props.jobs()?.map((job) => { return job.VacancyLocation })).values()].filter(loc => loc !== '').sort()
   }
   const occs: () => string[] = () => {
-    return [...new Set(props.jobs()?.map((job) => { return job.VacancyOccupation })).values()].filter(occ => !!occ)
+    return [...new Set(props.jobs()?.map((job) => { return job.VacancyOccupation })).values()].filter(occ => !!occ).sort()
   }
   const lvls: () => string[] = () => {
     return [...new Set(props.jobs()?.map((job) => { return job.VacancyLevel })).values()].filter(lvl => !!lvl).sort((a, b) => {
