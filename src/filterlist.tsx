@@ -2,6 +2,7 @@ import { createSignal, createEffect, For, Show } from 'solid-js'
 import type { Setter, Accessor } from 'solid-js'
 import type { Filter, Job } from './JobSearch.tsx'
 import { filterExact, filterAny } from './JobSearch.tsx'
+import AllFilters from './allfilters.tsx'
 
 
 type Props = {
@@ -17,17 +18,33 @@ export default function FilterList(props: Props) {
   const [lvlFilter, setLvlFilter] = createSignal<string[]>([])
   const [search, setSearch] = createSignal<string>(props.initialSearch ?? '')
   const [value, setValue] = createSignal<string | null | undefined>()
+  const [filtersOpen, setFiltersOpen] = createSignal<boolean>(false)
   const orgs: () => string[] = () => {
-    return [...new Set(props.jobs()?.map((job) => {return job.OrganizationAcronym})).values()]
+    return [...new Set(props.jobs()?.map((job) => {return job.OrganizationAcronym})).values()].filter(org => org !== '')
   }
   const locs: () => string[] = () => {
-    return [...new Set(props.jobs()?.map((job) => { return job.VacancyLocation })).values()]
+    return [...new Set(props.jobs()?.map((job) => { return job.VacancyLocation })).values()].filter(loc => loc !== '')
   }
   const occs: () => string[] = () => {
-    return [...new Set(props.jobs()?.map((job) => { return job.VacancyOccupation })).values()].filter(occ => occ !== null)
+    return [...new Set(props.jobs()?.map((job) => { return job.VacancyOccupation })).values()].filter(occ => !!occ)
   }
   const lvls: () => string[] = () => {
-    return [...new Set(props.jobs()?.map((job) => { return job.VacancyLevel })).values()].filter(lvl => lvl !== null)
+    return [...new Set(props.jobs()?.map((job) => { return job.VacancyLevel })).values()].filter(lvl => !!lvl).sort((a, b) => {
+      // ridiculous sort function to get grade levels in ascending order
+      // internship goes at the bottom, then it sorts by grade category D,G,P
+      // then by step
+      if (a === 'Internship') {
+        return 1
+      }
+      if (b === 'Internship') {
+        return -1
+      }
+      if (a.charAt(0) === b.charAt(0)) {
+        return Math.sign(parseInt(a.slice(1))-parseInt(b.slice(1)))
+      } else {
+        return a.charAt(0) < b.charAt(0) ? -1 : 1
+      }
+    })
   }
   const filteredOrgs = () => value() ? orgs().filter(org => org.toLowerCase().includes(value().toLowerCase())) : []
   const filteredLocs = () => value() ? locs().filter(loc => loc.toLowerCase().includes(value().toLowerCase())) : []
@@ -98,12 +115,10 @@ export default function FilterList(props: Props) {
       setValue('')
     }
     if (keyword.includes('Category')) {
-      console.log('got occupation', getValue())
       addOcc(getValue())
       setValue('')
     }
     if (keyword.includes('Level')) {
-      console.log('got level', getValue())
       addLvl(getValue())
       setValue('')
     }
@@ -147,7 +162,7 @@ export default function FilterList(props: Props) {
           }
           </For>
         </datalist>
-      </form>
+      </form>  
       </div>
       <Show when={locFilter().length > 0 || orgFilter().length > 0 || search().length > 0 || occFilter().length > 0 || lvlFilter().length > 0 } fallback={<div style={{height: '2rem', padding: '0.5rem 0'}}><em>Start typing the name of an organization, city, country, or keyword to filter the jobs list.</em></div>}>
         <div id="appliedfilters">
@@ -173,6 +188,15 @@ export default function FilterList(props: Props) {
           </Show>
         </div>
       </Show>
+      <button onclick={() => setFiltersOpen(prev => !prev)}>{filtersOpen() ? 'Close filters' : 'Show all filters'}</button>
+      <Show when={filtersOpen()}>
+        <div id="all-filters-box">
+          <AllFilters class={'filter-grow'} opts={locs} filteredOpts={filteredLocs} addOpt={addLoc} rmOpt={rmLoc} optFilter={locFilter} title='Location' />
+          <AllFilters class={'filter-shrink'} opts={orgs} filteredOpts={filteredOrgs} addOpt={addOrg} rmOpt={rmOrg} optFilter={orgFilter} title='Organization' />
+          <AllFilters class={'filter-shrink'} opts={lvls} filteredOpts={filteredLvls} addOpt={addLvl} rmOpt={rmLvl} optFilter={lvlFilter} title='Grade Level' />
+          <AllFilters class={'filter-grow'} opts={occs} filteredOpts={filteredOccs} addOpt={addOcc} rmOpt={rmOcc} optFilter={occFilter} title='Category' />
+        </div>
+      </Show>
     </>
   )
 }
@@ -187,6 +211,30 @@ const isQuickClick = (value: string | null | undefined): boolean => {
 } 
 
 const style = `
+#all-filters-box {
+  display: flex;
+  flex-direction: row;
+  align-content: start;
+  gap: 0.5rem;
+  flex-wrap: no-wrap;
+  max-height: 400px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: 1rem 0;
+  border: 2px solid rgb(92, 92, 92);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.filter-shrink {
+  flex-shrink: 1;
+  max-width: 25%;
+}
+
+.filter-grow {
+  flex-grow: 1;
+}
+
 #appliedfilters {
   padding: 1rem 0;
   display: flex;
@@ -200,7 +248,7 @@ const style = `
   width: 100%;
 }
 
-#filter-list > form > input {
+#filter-list > form > input[type="search"] {
   appearance: none;
   border: 2px solid rgb(92, 92, 92);
   border-right: 0;
@@ -255,5 +303,18 @@ const style = `
   padding: 0.5rem 0.5rem;
   text-align: center;
   text-decoration: none;
+}
+
+body::-webkit-scrollbar {
+  width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }
 `
