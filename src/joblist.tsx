@@ -218,20 +218,24 @@ const doMetrics = async (featured: boolean, vacancyID: number, orgID: number) =>
 }
 
 // intake metrics endpoint, add to global window object to call directly from HTML source
-const sendIntakeMetric = async () => {
+// typeID differentiates clicks for:
+// 4 - Apply for advocacy
+// 5 - Join Talent Network
+// 6 - Other Opportunities (oversight roles)
+const sendIntakeMetric = async (typeID: number) => {
   fetch('/Main/Home/LogUsage', {
     method: 'POST',
-    body: JSON.stringify({"usageTypeID": 4, "userID": 0})
+    body: JSON.stringify({"usageTypeID": typeID, "userID": 0})
   })
 }
 
-const doIntakeMetric = (): boolean => {
-  sendIntakeMetric()
+const doIntakeMetric = (typeID: number): boolean => {
+  sendIntakeMetric(typeID)
   // return false in the onclick handler so that the normal function of the anchor link takes over
   // target must be _blank to allow this send to happen in the background while the browser navigates
   return false
 }
 declare global {
-    interface Window { doIntakeMetric: () => void; }
+    interface Window { doIntakeMetric: (typeID: number) => void; }
 }
 window.doIntakeMetric = doIntakeMetric;
