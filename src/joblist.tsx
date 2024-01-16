@@ -137,6 +137,7 @@ button:disabled {
 
 type Props = {
   jobs: Accessor<Job[]>
+  featured?: boolean
 }
 
 export function JobList(props: Props) {
@@ -177,7 +178,7 @@ export function JobList(props: Props) {
       <For each={paginatedJobs()}>{(job) =>
         <div class="job-item" role="listitem">
           <div class={ref?.offsetWidth <= 800 ? "title-container--small" :"title-container"}>
-            <div class="title"><a onclick={() => {doMetrics(1, job.VacancyID, job.OrganizationID); return false;}} target="_blank" href={job.VacancyDetailURL}>{job.VacancyTitle}{job.VacancyLevel && <span> ({job.VacancyLevel})</span>}</a></div>
+            <div class="title"><a onclick={() => {doMetrics(props.featured, job.VacancyID, job.OrganizationID); return false;}} target="_blank" href={job.VacancyDetailURL}>{job.VacancyTitle}{job.VacancyLevel && <span> ({job.VacancyLevel})</span>}</a></div>
             <Show when={job.VacancyDeadline}>
               <div class="closes">Closes {job.VacancyDeadline}</div>
             </Show>
@@ -207,9 +208,30 @@ export function JobList(props: Props) {
   ) 
 }
 
-const doMetrics = async (visitType: number, vacancyID: number, orgID: number) => {
+// job list metrics endpoint
+const doMetrics = async (featured: boolean, vacancyID: number, orgID: number) => {
+  const visitType = featured ? 1 : 2
   fetch('/Main/Jobs/UserClickedOnJobLink', {
     method: 'POST',
     body: JSON.stringify({"visitTypeID": visitType, "vacancyID": vacancyID, "organizationID": orgID, "userID": 0})
   })
 }
+
+// intake metrics endpoint, add to global window object to call directly from HTML source
+const sendIntakeMetric = async () => {
+  fetch('/Main/Home/LogUsage', {
+    method: 'POST',
+    body: JSON.stringify({"usageTypeID": 4, "userID": 0})
+  })
+}
+
+const doIntakeMetric = (): boolean => {
+  sendIntakeMetric()
+  // return false in the onclick handler so that the normal function of the anchor link takes over
+  // target must be _blank to allow this send to happen in the background while the browser navigates
+  return false
+}
+declare global {
+    interface Window { doIntakeMetric: () => void; }
+}
+window.doIntakeMetric = doIntakeMetric;
