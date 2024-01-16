@@ -19,6 +19,7 @@ export default function FilterList(props: Props) {
   const [search, setSearch] = createSignal<string>(props.initialSearch ?? '')
   const [value, setValue] = createSignal<string | null | undefined>()
   const [filtersOpen, setFiltersOpen] = createSignal<boolean>(false)
+  const [tab, setTab] = createSignal<number>(0)
   const orgs: () => string[] = () => {
     return [...new Set(props.jobs()?.map((job) => {return job.OrganizationAcronym})).values()].filter(org => org !== '').sort()
   }
@@ -190,12 +191,20 @@ export default function FilterList(props: Props) {
       </Show>
       <button onclick={() => setFiltersOpen(prev => !prev)}>{filtersOpen() ? 'Close filters' : 'Show all filters'}</button>
       <Show when={filtersOpen()}>
-        <div id="all-filters-box">
-          <AllFilters class={'filter-grow'} opts={locs} filteredOpts={filteredLocs} addOpt={addLoc} rmOpt={rmLoc} optFilter={locFilter} title='Location' />
-          <AllFilters class={'filter-shrink'} opts={orgs} filteredOpts={filteredOrgs} addOpt={addOrg} rmOpt={rmOrg} optFilter={orgFilter} title='Organization' />
-          <AllFilters class={'filter-shrink'} opts={lvls} filteredOpts={filteredLvls} addOpt={addLvl} rmOpt={rmLvl} optFilter={lvlFilter} title='Grade Level' />
-          <AllFilters class={'filter-grow'} opts={occs} filteredOpts={filteredOccs} addOpt={addOcc} rmOpt={rmOcc} optFilter={occFilter} title='Category' />
+      <div role="tablist">
+        <div id="tab-controls">
+          <button role="tab" aria-controls="all-filters-box" aria-selected={tab() === 0 ? "true" : "false"} onclick={() => setTab(0)} class={tab() === 0 ? 'active' : null}>Location</button>
+          <button role="tab" aria-controls="all-filters-box" aria-selected={tab() === 1 ? "true" : "false"} onclick={() => setTab(1)} class={tab() === 1 ? 'active' : null}>Organization</button>
+          <button role="tab" aria-controls="all-filters-box" aria-selected={tab() === 2 ? "true" : "false"} onclick={() => setTab(2)} class={tab() === 2 ? 'active' : null}>Grade Level</button>
+          <button role="tab" aria-controls="all-filters-box" aria-selected={tab() === 3 ? "true" : "false"} onclick={() => setTab(3)} class={tab() === 3 ? 'active' : null}>Job Category</button>
         </div>
+        <div id="all-filters-box" aria-live="assertive" aria-atomic="true">
+          {tab() === 0 && <AllFilters opts={locs} filteredOpts={filteredLocs} addOpt={addLoc} rmOpt={rmLoc} optFilter={locFilter} title='Location' />}
+          {tab() === 1 && <AllFilters opts={orgs} filteredOpts={filteredOrgs} addOpt={addOrg} rmOpt={rmOrg} optFilter={orgFilter} title='Organization' />}
+          {tab() === 2 && <AllFilters opts={lvls} filteredOpts={filteredLvls} addOpt={addLvl} rmOpt={rmLvl} optFilter={lvlFilter} title='Grade Level' />}
+          {tab() === 3 && <AllFilters opts={occs} filteredOpts={filteredOccs} addOpt={addOcc} rmOpt={rmOcc} optFilter={occFilter} title='Category' />}
+        </div>
+      </div>
       </Show>
     </>
   )
@@ -211,19 +220,33 @@ const isQuickClick = (value: string | null | undefined): boolean => {
 } 
 
 const style = `
-#all-filters-box {
+#tab-controls {
   display: flex;
   flex-direction: row;
+  gap: 0.2rem;
   align-content: start;
-  gap: 0.5rem;
   flex-wrap: no-wrap;
+  margin-top: 1rem;
+  transform: translateY(2px);
+}
+
+#tab-controls > button {
+  border: 2px solid rgb(92,92,92);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+#tab-controls > button.active {
+  border-bottom: 2px solid #fff;
+}
+
+#all-filters-box {
   max-height: 400px;
-  overflow-y: scroll;
-  overflow-x: scroll;
-  margin: 1rem 0;
+  margin: 0;
+  margin-bottom: 1rem;
   border: 2px solid rgb(92, 92, 92);
-  border-radius: 0.5rem;
   padding: 0.5rem 0;
+  overflow-y: auto;
 }
 
 .filter-shrink {
