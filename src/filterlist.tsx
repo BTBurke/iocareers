@@ -234,10 +234,11 @@ const style = `
   border: 2px solid rgb(92,92,92);
   border-radius: 0;
   box-shadow: none;
+  background: #fff;
 }
 
 #tab-controls > button.active {
-  border-bottom: 2px solid #fff;
+  border-bottom: none;
 }
 
 #all-filters-box {
