@@ -223,7 +223,7 @@ const style = `
 #tab-controls {
   display: flex;
   flex-direction: row;
-  gap: 0.2rem;
+  gap: 0.1rem;
   align-content: start;
   flex-wrap: no-wrap;
   margin-top: 1rem;
@@ -231,6 +231,8 @@ const style = `
 }
 
 #tab-controls > button {
+  flex-grow: 1;
+  padding: 0.5rem 0;
   border: 2px solid rgb(92,92,92);
   border-radius: 0;
   box-shadow: none;
@@ -238,7 +240,7 @@ const style = `
 }
 
 #tab-controls > button.active {
-  border-bottom: none;
+  border-bottom: 2px solid #fff;
 }
 
 #all-filters-box {
