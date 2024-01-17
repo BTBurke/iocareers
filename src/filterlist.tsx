@@ -191,7 +191,7 @@ export default function FilterList(props: Props) {
       </Show>
       <button onclick={() => setFiltersOpen(prev => !prev)}>{filtersOpen() ? 'Close filters' : 'Show all filters'}</button>
       <Show when={filtersOpen()}>
-      <div role="tablist">
+      <div role="tablist" id="all-filters">
         <div id="tab-controls">
           <button role="tab" aria-controls="all-filters-box" aria-selected={tab() === 0 ? "true" : "false"} onclick={() => setTab(0)} class={tab() === 0 ? 'active' : null}>Location</button>
           <button role="tab" aria-controls="all-filters-box" aria-selected={tab() === 1 ? "true" : "false"} onclick={() => setTab(1)} class={tab() === 1 ? 'active' : null}>Organization</button>
@@ -220,6 +220,10 @@ const isQuickClick = (value: string | null | undefined): boolean => {
 } 
 
 const style = `
+#all-filters {
+  background: #efefef;
+}
+
 #tab-controls {
   display: flex;
   flex-direction: row;
