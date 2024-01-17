@@ -133,6 +133,11 @@ button:disabled {
   margin: 0 auto;
   margin-top: 1rem;
 }
+
+.page-size {
+  display: flex;
+  flex-gap: 0.5rem;
+}
 `
 
 type Props = {
@@ -148,18 +153,18 @@ export function JobList(props: Props) {
   let ref: HTMLElement
 
   // pagination
-  const PAGE_SIZE = 25 // number of jobs per page
-  const total = () => {
-    return Math.ceil(props.jobs().length / PAGE_SIZE) // total pages
-  }
   const [page, setPage] = createSignal(0)
+  const [pagesize, setPagesize] = createSignal(25)
+  const total = () => {
+    return Math.ceil(props.jobs().length / pagesize()) // total pages
+  }
   const paginatedJobs = () => {
-    // returns PAGE_SIZE # of jobs at a time
+    // returns pagesize() # of jobs at a time
     const next = page()+1
-    if (next*PAGE_SIZE > props.jobs().length) {
-      return props.jobs().slice(page()*PAGE_SIZE, props.jobs().length)
+    if (next*pagesize() > props.jobs().length) {
+      return props.jobs().slice(page()*pagesize(), props.jobs().length)
     }
-    return props.jobs().slice(page()*PAGE_SIZE, next*PAGE_SIZE)
+    return props.jobs().slice(page()*pagesize(), next*pagesize())
   }
   createEffect(() => {
     // effect runs when jobs changes as a result of applying filters
@@ -199,9 +204,18 @@ export function JobList(props: Props) {
     <div id="pagination">
       <div>
           <button onclick={() => { setPage(p => p-1); ref.scrollIntoView() }} disabled={page() === 0}>« Previous</button>
-          <span style={{margin: '2rem'}}>{page()*PAGE_SIZE+1} - {Math.min((page()+1)*PAGE_SIZE, props.jobs().length)} of {props.jobs().length}</span>
+          <span style={{margin: '2rem'}}>{page()*pagesize()+1} - {Math.min((page()+1)*pagesize(), props.jobs().length)} of {props.jobs().length}</span>
           <button onclick={() => { setPage(p => p+1); ref.scrollIntoView() }} disabled={page() === total()-1}>Next »</button>
       </div>
+      <Show when={props.jobs().length > 25}>
+        <div class="page-size">
+          Number of jobs per page: 
+          <a role="button" aria-label="set page size" onclick={() => setPagesize(25)}>25</a>
+          <a role="button" aria-label="set page size" onclick={() => setPagesize(50)}>50</a>
+          <a role="button" aria-label="set page size" onclick={() => setPagesize(100)}>100</a>
+          <a role="button" aria-label="set page size" onclick={() => setPagesize(100000)}>All</a>
+        </div>
+      </Show>
     </div>
     </Show>
     </>
