@@ -191,7 +191,7 @@ export function JobList(props: Props) {
     <style>{style}</style>
     <Show when={props.jobs().length > 0} fallback={<div id="joblist"><h3>No jobs match your search</h3></div>}>
     <div id="joblist" ref={el => ref=el} class="usa-prose" role="list" aria-live="assertive" aria-atomic="true">
-      <Show when={props.jobs().length > 25}>
+      <Show when={!props.featured}>
         <div class="page-size">
           <div>
             <h3>Found {props.jobs().length} jobs</h3>
