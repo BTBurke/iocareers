@@ -24,6 +24,10 @@
     {
       "source": "/Main/Jobs/UserClickedOnJobLink",
       "destination": "/api/metrics"
+    },
+    {
+      "source": "/Main/Home/LogUsage",
+      "destination": "/api/metrics"
     }
   ]
 }

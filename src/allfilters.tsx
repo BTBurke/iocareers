@@ -16,10 +16,8 @@ type Props = {
 const onChange = (id: string, add: AddFilter, remove: RmFilter) => (ev: Event) => {
     const el = ev.target as HTMLFormElement
     if (el.checked) {
-        console.log('got add')
         add(id)
     } else {
-        console.log('got remove')
         remove(id)()
     }
 } 
@@ -28,7 +26,7 @@ export default function AllFilters(props: Props) {
     return (
         <>
         <style>{style}</style>
-        <form action="" class={props.class}>
+        <form action="" class="form" role="tabpanel" id={"tab-" + props.title}>
             <fieldset>
             <Show when={props.title}><legend>{props.title}</legend></Show>
             <For each={props.filteredOpts().length > 0 ? props.filteredOpts() : props.opts()}>{(opt) =>
@@ -48,6 +46,17 @@ export default function AllFilters(props: Props) {
 }
 
 const style = `
+    .form {
+        column-count: 2;
+        column-gap: 1rem;
+        column-rule: 1px solid rgb(92,92,92);
+    }
+    @media(max-width: 800px) {
+        .form {
+            column-count: 1;
+            column-rule: none;
+        }
+    }
     fieldset {
         border: 0;
     }
