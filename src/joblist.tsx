@@ -135,8 +135,18 @@ button:disabled {
 }
 
 .page-size {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 1rem;
   display: flex;
-  flex-gap: 0.5rem;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.page-size > a {
+  color: #005ea2;
+  cursor: pointer;
+
 }
 `
 
@@ -207,16 +217,16 @@ export function JobList(props: Props) {
           <span style={{margin: '2rem'}}>{page()*pagesize()+1} - {Math.min((page()+1)*pagesize(), props.jobs().length)} of {props.jobs().length}</span>
           <button onclick={() => { setPage(p => p+1); ref.scrollIntoView() }} disabled={page() === total()-1}>Next »</button>
       </div>
+    </div>
       <Show when={props.jobs().length > 25}>
         <div class="page-size">
           Number of jobs per page: 
-          <a role="button" aria-label="set page size" onclick={() => setPagesize(25)}>25</a>
-          <a role="button" aria-label="set page size" onclick={() => setPagesize(50)}>50</a>
-          <a role="button" aria-label="set page size" onclick={() => setPagesize(100)}>100</a>
-          <a role="button" aria-label="set page size" onclick={() => setPagesize(100000)}>All</a>
+          {pagesize() !== 25 ? <a role="button" aria-label="set page size" onclick={() => setPagesize(25)}>25</a> : <span>25</span>}
+          {pagesize() !== 50 ? <a role="button" aria-label="set page size" onclick={() => setPagesize(50)}>50</a> : <span>50</span>}
+          {pagesize() !== 100 ? <a role="button" aria-label="set page size" onclick={() => setPagesize(100)}>100</a> : <span>100</span>}
+          {pagesize() !== 100000 ? <a role="button" aria-label="set page size" onclick={() => setPagesize(100000)}>All</a> : <span>All</span>}
         </div>
       </Show>
-    </div>
     </Show>
     </>
   ) 
