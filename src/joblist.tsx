@@ -221,10 +221,10 @@ export function JobList(props: Props) {
       <Show when={props.jobs().length > 25}>
         <div class="page-size">
           Number of jobs per page: 
-          {pagesize() !== 25 ? <a role="button" aria-label="set page size" onclick={() => setPagesize(25)}>25</a> : <span>25</span>}
-          {pagesize() !== 50 ? <a role="button" aria-label="set page size" onclick={() => setPagesize(50)}>50</a> : <span>50</span>}
-          {pagesize() !== 100 ? <a role="button" aria-label="set page size" onclick={() => setPagesize(100)}>100</a> : <span>100</span>}
-          {pagesize() !== 100000 ? <a role="button" aria-label="set page size" onclick={() => setPagesize(100000)}>All</a> : <span>All</span>}
+          {pagesize() !== 25 ? <a role="button" aria-label="set page size" onclick={() => { setPagesize(25); setPage(0);}}>25</a> : <span>25</span>}
+          {pagesize() !== 50 ? <a role="button" aria-label="set page size" onclick={() => { setPagesize(50); setPage(0);}}>50</a> : <span>50</span>}
+          {pagesize() !== 100 ? <a role="button" aria-label="set page size" onclick={() => { setPagesize(100); setPage(0)}}>100</a> : <span>100</span>}
+          {pagesize() !== 100000 ? <a role="button" aria-label="set page size" onclick={() => { setPagesize(100000); setPage(0)}}>All</a> : <span>All</span>}
         </div>
       </Show>
     </Show>
