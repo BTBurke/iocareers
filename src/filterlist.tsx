@@ -138,8 +138,8 @@ export default function FilterList(props: Props) {
     <>
       <style>{style}</style>
       <div id="filter-list">
-      <form ref={el => formRef=el} onsubmit={onSubmit}>
-        <input ref={el => inputRef=el} type="search" autocapitalize="off" autocomplete="off" name="filter" oninput={(v) => setValue(v.target.value)} list="filters"/>
+      <form ref={el => formRef=el} onsubmit={onSubmit} role="search" aria-label="Job search">
+        <input role="searchbox" ref={el => inputRef=el} type="search" autocapitalize="off" autocomplete="off" name="filter" oninput={(v) => setValue(v.target.value)} list="filters"/>
         <button type="submit">Search</button> 
         <datalist id="filters">
           <Show when={!isQuickClick(value()) && value()?.length > 0}>
