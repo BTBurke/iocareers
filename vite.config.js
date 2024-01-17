@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import handlebars from 'vite-plugin-handlebars';
 import solid from 'vite-plugin-solid';
 import { defineConfig } from 'vite';
+import purgeCSS from "@mojojoejo/vite-plugin-purgecss";
 
 export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
 
@@ -42,6 +43,9 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
           rewrite: false
         }
       }),
+      purgeCSS({
+        variables: true,
+      }),
       solid()
     ]
   }
@@ -53,6 +57,9 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
           context: {
             rewrite: true  //adds <base> tag to rewrite internal links with /Main/Content/Public/<page> path
           }
+        }),
+        purgeCSS({
+          variables: true,
         }),
         solid()
       ],
