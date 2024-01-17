@@ -139,14 +139,15 @@ button:disabled {
   margin: 0 auto;
   margin-top: 1rem;
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px double #d9e8f6;
+  padding-bottom: 0.5rem;
 }
 
-.page-size > a {
-  color: #005ea2;
-  cursor: pointer;
-
+.page-size h3 {
+  margin: 0;
+  padding: 0;
 }
 `
 
@@ -190,6 +191,24 @@ export function JobList(props: Props) {
     <style>{style}</style>
     <Show when={props.jobs().length > 0} fallback={<div id="joblist"><h3>No jobs match your search</h3></div>}>
     <div id="joblist" ref={el => ref=el} class="usa-prose" role="list" aria-live="assertive" aria-atomic="true">
+      <Show when={props.jobs().length > 25}>
+        <div class="page-size">
+          <div>
+            <h3>Found {props.jobs().length} jobs</h3>
+          </div>
+          <div>
+            <form action="">
+              <label for="jobs-per-page">Jobs per page </label>
+              <select id="jobs-per-page" aria-label="jobs per page" onchange={(ev) => { setPagesize(parseInt(ev.target.value)); setPage(0); }} style={{"padding": "0.3rem"}}>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="100000">All</option>
+              </select>
+            </form>
+          </div>
+        </div>
+      </Show>
       <For each={paginatedJobs()}>{(job) =>
         <div class="job-item" role="listitem">
           <div class={ref?.offsetWidth <= 800 ? "title-container--small" :"title-container"}>
@@ -218,15 +237,6 @@ export function JobList(props: Props) {
           <button onclick={() => { setPage(p => p+1); ref.scrollIntoView() }} disabled={page() === total()-1}>Next »</button>
       </div>
     </div>
-      <Show when={props.jobs().length > 25}>
-        <div class="page-size">
-          Number of jobs per page: 
-          {pagesize() !== 25 ? <a role="button" aria-label="set page size" onclick={() => { setPagesize(25); setPage(0);}}>25</a> : <span>25</span>}
-          {pagesize() !== 50 ? <a role="button" aria-label="set page size" onclick={() => { setPagesize(50); setPage(0);}}>50</a> : <span>50</span>}
-          {pagesize() !== 100 ? <a role="button" aria-label="set page size" onclick={() => { setPagesize(100); setPage(0)}}>100</a> : <span>100</span>}
-          {pagesize() !== 100000 ? <a role="button" aria-label="set page size" onclick={() => { setPagesize(100000); setPage(0)}}>All</a> : <span>All</span>}
-        </div>
-      </Show>
     </Show>
     </>
   ) 
