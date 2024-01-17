@@ -245,6 +245,7 @@ const style = `
 
 #tab-controls > button.active {
   border-bottom: 2px solid #fff;
+  background: #efefef;
 }
 
 #all-filters-box {
