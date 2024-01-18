@@ -47,3 +47,9 @@ aside.quote {
     width: 50%;
   }
 }
+
+@media (max-width: 64em) {
+  .sm-text-center {
+    text-align: center;
+  }
+}
