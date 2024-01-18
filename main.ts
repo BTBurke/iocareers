@@ -1,4 +1,4 @@
-import './node_modules/@uswds/uswds/dist/css/uswds.min.css';
+import './assets/css/uswds.css';
 import '@uswds/uswds';
 import './index.css';
 import JobSearch from './src/JobSearch.tsx'
