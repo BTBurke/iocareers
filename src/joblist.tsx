@@ -247,6 +247,9 @@ const doMetrics = async (featured: boolean, vacancyID: number, orgID: number) =>
   const visitType = featured ? 1 : 2
   fetch('/Main/Jobs/UserClickedOnJobLink', {
     method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({"visitTypeID": visitType, "vacancyID": vacancyID, "organizationID": orgID, "userID": 0})
   })
 }
@@ -259,6 +262,9 @@ const doMetrics = async (featured: boolean, vacancyID: number, orgID: number) =>
 const sendIntakeMetric = async (typeID: number) => {
   fetch('/Main/Home/LogUsage', {
     method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({"usageTypeID": typeID, "userID": 0})
   })
 }
