@@ -2,7 +2,6 @@ import { resolve } from 'path';
 import handlebars from 'vite-plugin-handlebars';
 import solid from 'vite-plugin-solid';
 import { defineConfig } from 'vite';
-//import purgeCSS from "@mojojoejo/vite-plugin-purgecss";
 
 export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
 
