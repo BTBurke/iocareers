@@ -21,6 +21,9 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
         },
         output: {
           assetFileNames: (assetInfo) => {
+            if (assetInfo.name.match('hero.jpg')) {
+              return 'v3-hero.jpg'
+            }
             let extType = assetInfo.name.split('.').at(1);
             if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
               extType = 'img';
@@ -28,10 +31,10 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
             if (extType === 'woff2') {
               extType = 'fonts';
             }
-            return `${extType}/[name]-[hash][extname]`;
+            return `${extType}/[name][extname]`;
           },
-          chunkFileNames: 'js/[name]-[hash].js',
-          entryFileNames: 'js/[name]-[hash].js',
+          chunkFileNames: 'js/[name].js',
+          entryFileNames: 'js/[name].js',
         },
      },
     },
@@ -58,6 +61,9 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
       ],
       experimental: {
         renderBuiltUrl(filename) {
+          if (filename.match('hero.jpg')) {
+            return '/Main/Content/File/' + filename
+          }
             return '/Assets/v3/' + filename
           }
         }
