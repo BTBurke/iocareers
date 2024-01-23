@@ -34,7 +34,7 @@ export default function JobSearch(props: {search?: string, featured?: string}) {
         Loading...
       </Match>
       <Match when={!jobs.loading && jobs() && (props.search || props.featured)}>
-        <JobList jobs={filteredJobs} />
+        <JobList jobs={filteredJobs} featured={!!props.featured} />
       </Match>
       <Match when={!jobs.loading && jobs()}>
         <>

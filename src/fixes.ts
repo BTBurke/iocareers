@@ -51,14 +51,20 @@ const redundantLevels = (jobs: Job[]): Job[] => jobs.map(job => {
 
 const regularLevels = (jobs: Job[]): Job[] => jobs.map(job => Object.assign(job, {'VacancyLevel': job.VacancyLevel?.replace('-', '')}))
 
+// WFP links have URL-escaped &amp; instead of & in URLs
+const wfpLinks = (jobs: Job[]): Job[] => jobs.map(job => Object.assign(job, {'VacancyDetailURL': job.VacancyDetailURL.replace('&amp;', '&')}))
+
 export default [
   fao,
   replace('VacancyLocation', 'Korea (the Republic of)', 'South Korea'),
   replace('VacancyTitle', 'â??', '-'),
+  replace('VacancyTitle', '&amp;', '&'),
+  replace('VacancyTitle', '&#39;', "'"),
   iaea,
   replace('VacancyDeadline', '2050-01-01', ''),
   duplicates,
   titlecase,
   redundantLevels,
   regularLevels,
+  wfpLinks,
 ]

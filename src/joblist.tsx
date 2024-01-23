@@ -165,7 +165,7 @@ export function JobList(props: Props) {
 
   // pagination
   const [page, setPage] = createSignal(0)
-  const [pagesize, setPagesize] = createSignal(25)
+  const [pagesize, setPagesize] = createSignal(props.featured ? 10 : 25)
   const total = () => {
     return Math.ceil(props.jobs().length / pagesize()) // total pages
   }
