@@ -25,7 +25,7 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
               return 'v3-hero.jpg'
             }
             let extType = assetInfo.name.split('.').at(1);
-            if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            if (/min|png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
               extType = 'img';
             }
             if (extType === 'woff2') {
