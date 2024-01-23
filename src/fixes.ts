@@ -19,7 +19,7 @@ const duplicates = (jobs: Job[]): Job[] => {
 }
 
 // replaces a substring in a field
-const replace = (field: string, before: string, after: string) => (jobs: Job[]): Job[] => jobs.map(job => Object.assign(job, {[`${field}`]: job[field].replace(before, after)}))
+const replace = (field: string, before: string, after: string) => (jobs: Job[]): Job[] => jobs.map(job => Object.assign(job, {[`${field}`]: job[field].replaceAll(before, after)}))
 
 // FAO lists vacancy temporary length in the location field
 const fao = (jobs: Job[]): Job[] => jobs.map(job => (job.OrganizationAcronym === 'FAO') ? Object.assign(job, {'VacancyLocation': ''}) : job)
@@ -52,7 +52,7 @@ const redundantLevels = (jobs: Job[]): Job[] => jobs.map(job => {
 const regularLevels = (jobs: Job[]): Job[] => jobs.map(job => Object.assign(job, {'VacancyLevel': job.VacancyLevel?.replace('-', '')}))
 
 // WFP links have URL-escaped &amp; instead of & in URLs
-const wfpLinks = (jobs: Job[]): Job[] => jobs.map(job => Object.assign(job, {'VacancyDetailURL': job.VacancyDetailURL.replace('&amp;', '&')}))
+const wfpLinks = (jobs: Job[]): Job[] => jobs.map(job => Object.assign(job, {'VacancyDetailURL': job.VacancyDetailURL.replaceAll('&amp;', '&')}))
 
 export default [
   fao,
