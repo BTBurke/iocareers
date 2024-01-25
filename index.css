@@ -57,3 +57,10 @@ aside.quote {
 .margin-top-1 {
   margin-top: 1rem;
 }
+
+.talent-network {
+  font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+}
