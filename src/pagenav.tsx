@@ -118,6 +118,10 @@ nav > ul {
     padding: 0;
 }
 
+nav > ul > li {
+    cursor: pointer;
+}
+
 .current {
     border-left: 0.25rem solid #1b1b1b;
     margin-left: 0;
