@@ -122,11 +122,11 @@ nav > ul > li {
     cursor: pointer;
 }
 
-.current {
+li.current {
     border-left: 0.25rem solid #1b1b1b;
     margin-left: 0;
 }
-:not(.current) {
+li:not(.current) {
     margin-left: 0.25rem;
 }
 `
