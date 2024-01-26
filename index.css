@@ -1,3 +1,7 @@
+body {
+  scroll-behavior: smooth;
+}
+
 aside.quote {
   font-style: italic;
   border-left: 4px solid #00bde3;
@@ -63,4 +67,20 @@ aside.quote {
   font-size: 1.5rem;
   line-height: 1.5rem;
   font-weight: 700;
+}
+
+page-nav {
+  margin-left: 2rem;
+  margin-top: 1.25rem;
+  max-width: 15rem;
+  order: 2;
+  position: sticky;
+  top: 2rem;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  page-nav {
+    display: none;
+  }
 }
