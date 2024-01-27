@@ -34,7 +34,7 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
             return `${extType}/[name][extname]`;
           },
           chunkFileNames: 'js/[name].js',
-          entryFileNames: 'js/[name].js',
+          //entryFileNames: 'js/[name].js',
         },
      },
     },
