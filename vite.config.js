@@ -62,7 +62,7 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
       experimental: {
         renderBuiltUrl(filename) {
           if (filename.match('hero.jpg')) {
-            return '/Main/Content/File/' + filename
+            return '/Main/Content/File/v3-hero'
           }
             return '/Assets/v3/' + filename
           }
